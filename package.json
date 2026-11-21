@@ -1,0 +1,53 @@
+{
+  "name": "openclaw-wordpress-whatsapp",
+  "version": "1.0.0",
+  "description": "Autonomous publishing, directory launch kit, and social syndication engine integrating WordPress REST API, Product Hunt directory submissions, and WhatsApp notifications/command triggers.",
+  "main": "scripts/wp-cli.js",
+  "bin": {
+    "productkit": "./cli/productkit.js"
+  },
+  "scripts": {
+    "wp": "node scripts/wp-cli.js",
+    "help": "node scripts/wp-cli.js help",
+    "generate": "node scripts/generate-articles.js",
+    "generate-recent": "node scripts/generate-articles.js --recent-prds",
+    "generate-archive": "node scripts/generate-articles.js --archive",
+    "list-projects": "node scripts/generate-articles.js --list",
+    "generate-all": "node scripts/generate-articles.js --all",
+    "generate-alternatives": "node scripts/generate-articles.js --all --alternative",
+    "generate-force": "node scripts/generate-articles.js --all --force",
+    "attach-screenshots": "node scripts/generate-articles.js --attach-screenshots",
+    "backfill-screenshots": "node scripts/generate-articles.js --attach-screenshots",
+    "daily-social": "node scripts/daily-social-post.js --send",
+    "daily-social:dry": "node scripts/daily-social-post.js --dry-run",
+    "daily-social:list": "node scripts/daily-social-post.js --list",
+    "daily-social:screenshots": "node scripts/daily-social-post.js --screenshots-only --send",
+    "daily-social:screenshots-dry": "node scripts/daily-social-post.js --screenshots-only",
+    "daily-social:tiktok": "node scripts/daily-social-post.js --tiktok-only --send",
+    "daily-social:tiktok-dry": "node scripts/daily-social-post.js --tiktok-only",
+    "daily-social:bluesky": "node scripts/daily-social-post.js --bluesky",
+    "daily-social:bluesky-schedule": "node scripts/daily-social-post.js --bluesky-schedule 1h",
+    "launch-kit": "node scripts/project-launch-kit.js --send",
+    "launch-kit:dry": "node scripts/project-launch-kit.js --dry-run",
+    "launch-kit:list": "node scripts/project-launch-kit.js --list",
+    "launch-kit:screenshots": "node scripts/project-launch-kit.js --screenshots-only --send",
+    "resave-yoast": "docker cp scripts/resave-yoast-posts.php wordpress:/var/www/html/resave-yoast-posts.php && docker exec wordpress php -d memory_limit=512M /var/www/html/resave-yoast-posts.php",
+    "resave": "npm run resave-yoast",
+    "resave-posts": "npm run resave-yoast"
+  },
+  "keywords": [
+    "openclaw",
+    "wordpress",
+    "whatsapp",
+    "producthunt",
+    "seo",
+    "automation",
+    "social-media",
+    "playwright"
+  ],
+  "author": "thirza258",
+  "license": "MIT",
+  "dependencies": {
+    "playwright-core": "^1.40.0"
+  }
+}

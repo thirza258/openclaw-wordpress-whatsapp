@@ -1,0 +1,13 @@
+{
+  "example-app": {
+    "name": "Example Web Application",
+    "login_url": "https://example.com/login",
+    "capture_url": "https://example.com/dashboard",
+    "fields": {
+      "input[name='username']": "demo_user",
+      "input[name='password']": "demo_password"
+    },
+    "submit": "button[type='submit']",
+    "success_selector": ".dashboard-welcome"
+  }
+}

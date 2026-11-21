@@ -1,0 +1,16 @@
+{
+  "name": "openclaw-plugin-productkit",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Product launch kit command handler for WhatsApp and CLI",
+  "main": "index.js",
+  "openclaw": {
+    "extensions": [
+      "./index.js"
+    ]
+  },
+  "dependencies": {
+    "typebox": "^1.4.5"
+  }
+}

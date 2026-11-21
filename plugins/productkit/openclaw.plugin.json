@@ -1,0 +1,19 @@
+{
+  "id": "productkit",
+  "name": "ProductKit",
+  "description": "Product launch kit command handler for WhatsApp and CLI.",
+  "version": "1.0.0",
+  "activation": {
+    "onStartup": true
+  },
+  "configSchema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": false
+  },
+  "contracts": {
+    "tools": [
+      "productkit_command"
+    ]
+  }
+}

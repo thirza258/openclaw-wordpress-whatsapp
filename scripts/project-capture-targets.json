@@ -1,0 +1,14 @@
+{
+  "_comment": "Inside-the-app capture URLs for public (no-account) projects. Projects with credentials use capture_url from tiktok-accounts.json instead.",
+  "ai-systems-portfolio": "https://chat.nevatal.id/#tools",
+  "country-sdg": "https://sdg.nevatal.id/country/Indonesia/",
+  "english-practice": "https://english.nevatal.id/courses/",
+  "interviewer": "https://interview.nevatal.id/app/",
+  "literal-storyboard": "https://story.nevatal.id/#embark",
+  "nevatal": "https://chat.nevatal.id/#simulator",
+  "recommendica": "https://recommendica.nevatal.id/#write",
+  "uptime-medics": "https://uptime.nevatal.id/",
+  "videotex": "https://video.nevatal.id/feed/explore/",
+  "voltquest": "https://pcb.nevatal.id/sandbox",
+  "webisaurus": "https://c.nevatal.id/"
+}

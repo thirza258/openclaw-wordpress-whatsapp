@@ -1,0 +1,42 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+credentials/
+*.secret
+*.key
+scripts/tiktok-accounts.json
+!scripts/tiktok-accounts.example.json
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Runtime Logs
+*.log
+cron*.log
+daily-social.log
+launch-kit.log
+
+# State & History databases
+*history.json
+!*history.example.json
+articles_log.json
+daily_social_history.json
+launch_history.json
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.lock
+
+# Generated media and temporary screenshots
+screenshots/
+media/
+tmp/
+cache/
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

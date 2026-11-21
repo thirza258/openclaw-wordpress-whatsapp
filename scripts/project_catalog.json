@@ -1,0 +1,1295 @@
+{
+  "projects": [
+    {
+      "id": "nevatal",
+      "name": "Nevatal Document AI",
+      "container_names": [
+        "nevatal_backend",
+        "nevatal_frontend",
+        "postgres_db"
+      ],
+      "short_description": "Enterprise Document AI and RAG embeddings platform for smart document indexing and contextual search.",
+      "category": "Artificial Intelligence & Machine Learning",
+      "tags": [
+        "Document AI",
+        "RAG Pipeline",
+        "PostgreSQL",
+        "pgvector",
+        "Enterprise Search",
+        "Knowledge Management",
+        "AI Assistant"
+      ],
+      "focus_keywords": [
+        "Document AI and RAG pipeline",
+        "Enterprise RAG knowledge base",
+        "Private document search with AI",
+        "PostgreSQL vector search architecture"
+      ],
+      "url": "https://chat.nevatal.id",
+      "tech_stack": [
+        "FastAPI / Django Backend",
+        "React Frontend",
+        "PostgreSQL 16",
+        "pgvector",
+        "Document AI",
+        "Docker Compose"
+      ],
+      "key_features": [
+        "Dynamic document ingestion with chunking and semantic embeddings",
+        "High-accuracy Retrieval-Augmented Generation (RAG) answering",
+        "PostgreSQL pgvector storage for lightning-fast similarity search",
+        "Role-based access control and secure transport key encryption",
+        "Persisted media embeddings surviving container restarts"
+      ],
+      "use_cases": [
+        "Internal corporate wiki and knowledge base search",
+        "Legal and compliance document analysis",
+        "Technical documentation contextual assistant",
+        "Customer support automated policy lookup"
+      ]
+    },
+    {
+      "id": "english-practice",
+      "name": "English Practice Diagnostic",
+      "container_names": [
+        "english-practice-web-1"
+      ],
+      "short_description": "AI-powered English grammar diagnostic and adaptive learning web platform with OpenRouter question generation and persistent question banks.",
+      "category": "Education & Language Learning",
+      "tags": [
+        "English Practice",
+        "Grammar Diagnostic",
+        "AI Question Generator",
+        "Django",
+        "OpenRouter",
+        "Adaptive Learning",
+        "Language Assessment"
+      ],
+      "focus_keywords": [
+        "AI English grammar diagnostic platform",
+        "Adaptive English question generator Django",
+        "OpenRouter English grammar assessment",
+        "Interactive English learning diagnostic tool"
+      ],
+      "port": 5170,
+      "url": "https://english.nevatal.id",
+      "tech_stack": [
+        "Django 5",
+        "Python 3.12",
+        "OpenRouter API (GPT-4o-mini / Gemma)",
+        "SQLite with Data Persistence",
+        "Gunicorn",
+        "WhiteNoise",
+        "Docker Compose",
+        "Bootstrap 5"
+      ],
+      "archive_reference": "archive/English_Practice_PRD.md",
+      "architecture_reference": "archive/English_Practice_Architecture.md",
+      "key_features": [
+        "Adaptive hidden-topic English grammar diagnostic testing with instant score evaluations",
+        "Dynamic AI question generation powered by OpenRouter LLMs with prompt safety checks",
+        "Automatic fallback to local question bank for zero-downtime and offline testing",
+        "Persistent question bank and active test sessions surviving container restarts via mounted SQLite database",
+        "Detailed diagnostic breakdown with CEFR alignment, grammatical explanations, and study suggestions"
+      ],
+      "use_cases": [
+        "Individual English learners identifying specific grammar weaknesses",
+        "ESL, TOEFL, and IELTS students preparing for diagnostic proficiency exams",
+        "Educators generating customizable grammar assessment sessions automatically",
+        "Showcase of fault-tolerant AI architectures combining cloud LLMs with local fallback question banks"
+      ]
+    },
+    {
+      "id": "divinity-ai",
+      "name": "DivinityAI - Islamic Grounded RAG",
+      "container_names": [],
+      "short_description": "Strict corpus-locked Islamic Retrieval-Augmented Generation (RAG) system with intent routing, HyDE expansion, hybrid search, and deterministic citation verification.",
+      "category": "Artificial Intelligence & Machine Learning",
+      "tags": [
+        "Islamic AI",
+        "Grounded RAG",
+        "Quran Search",
+        "Hadith Research",
+        "Hybrid Retrieval",
+        "BM25",
+        "BGE-M3",
+        "Citation Verification",
+        "ChromaDB",
+        "Django"
+      ],
+      "focus_keywords": [
+        "Grounded Islamic RAG AI system",
+        "Hallucination free Quran Hadith search",
+        "Corpus locked Retrieval Augmented Generation",
+        "Deterministic citation verification AI"
+      ],
+      "url": "https://muslim.nevatal.id",
+      "tech_stack": [
+        "Django ASGI / DRF",
+        "React 19 / Vite",
+        "ChromaDB",
+        "BGE-M3 Embeddings",
+        "BM25 Sparse Search",
+        "Reciprocal Rank Fusion",
+        "OpenRouter (Gemini 2.5 Flash)",
+        "Groq (Llama 3.3 70B)",
+        "Tailwind CSS v4"
+      ],
+      "archive_reference": "archive/DivinityAI_PRD.md",
+      "architecture_reference": "archive/DivinityAI_Architecture.md",
+      "key_features": [
+        "Strict corpus-lock policy refusing answers not grounded in authentic Quran and canonical Hadith collections",
+        "Five-path Intent Router (Quran verse, Hadith, Fiqh, Calculation, Off-Domain) with confidence gating",
+        "Hypothetical Document Embeddings (HyDE) and sub-query decomposition for nuanced jurisprudential queries",
+        "Hybrid BM25 sparse matching on normalized Arabic text combined with BGE-M3 dense embeddings",
+        "Deterministic 4-tier citation verification chain (exact match, normalized, Levenshtein distance, semantic check)",
+        "Pre-generation evidence sufficiency checks and post-generation fatwa boundary / hallucination detectors",
+        "Optimized Right-to-Left (RTL) Arabic typography and Uthmani script rendering"
+      ],
+      "use_cases": [
+        "Scholarly research and authenticated Quran/Hadith reference discovery without hallucination risks",
+        "Academic study of classical Arabic religious texts and cross-source comparative analysis",
+        "Reference design pattern for high-stakes zero-hallucination domain-specific RAG architectures"
+      ]
+    },
+    {
+      "id": "crag-multihop",
+      "name": "CRAG MultiHop Reasoning Engine",
+      "container_names": [],
+      "short_description": "Multi-hop reasoning and Corrective Retrieval-Augmented Generation (CRAG) system with query decomposition, self-grading retrieval, and local reranking.",
+      "category": "Artificial Intelligence & Machine Learning",
+      "tags": [
+        "Multi-Hop RAG",
+        "Corrective RAG",
+        "CRAG",
+        "Query Decomposition",
+        "Jina Reranker",
+        "ChromaDB",
+        "Celery",
+        "FastAPI",
+        "WebSockets",
+        "Django ASGI"
+      ],
+      "focus_keywords": [
+        "Corrective RAG MultiHop reasoning",
+        "Self grading retrieval augmented generation",
+        "Multi step query decomposition AI",
+        "Jina reranker hybrid RAG pipeline"
+      ],
+      "url": "https://crag.nevatal.id",
+      "tech_stack": [
+        "Django ASGI / Daphne",
+        "React + Vite",
+        "ChromaDB",
+        "Celery + Redis",
+        "Jina Reranker v3",
+        "intfloat/multilingual-e5-small",
+        "BM25",
+        "OpenRouter (Qwen 30B)",
+        "WebSockets"
+      ],
+      "archive_reference": "archive/CRAG_MultiHop_App_PRD.md",
+      "architecture_reference": "archive/CRAG_MultiHop_App_Architecture.md",
+      "key_features": [
+        "Sequential multi-hop query decomposition splitting complex questions into logical sub-queries (up to 3 hops)",
+        "Corrective RAG (CRAG) self-grading evaluator classifying retrieved context as correct, ambiguous, or incorrect",
+        "Automated fallback to live external search when retrieved context is ambiguous or insufficient",
+        "Hybrid Dense vector + BM25 sparse retrieval merged and ranked via local Cross-Encoder (jina-reranker-v3)",
+        "Real-time WebSocket event streaming visualizing pipeline progress (retrieval, grading, reranking, generation)",
+        "Asynchronous document ingestion (PDF, TXT, web URLs) powered by Celery worker queues"
+      ],
+      "use_cases": [
+        "Complex research and multi-document intelligence investigations requiring multi-step deductions",
+        "Automated high-precision document QA with self-healing fallback mechanisms",
+        "Developer reference implementation for self-grading agentic RAG workflows"
+      ]
+    },
+    {
+      "id": "rag-reader",
+      "name": "RagReader - Composable RAG Benchmark & Research Workspace",
+      "container_names": [],
+      "short_description": "Open-source RAG research workspace with cited document chat, a configurable multi-LLM deep-analysis matrix, and 13 composable advanced retrieval modules (HyDE, RAG Fusion, RAPTOR, CRAG, Adaptive RAG and more) scored with retrieval and Ragas metrics.",
+      "category": "Artificial Intelligence & Developer Tools",
+      "tags": [
+        "RAG Benchmark",
+        "Composable RAG",
+        "Advanced RAG Modules",
+        "Document QA",
+        "Citations",
+        "HyDE",
+        "RAG Fusion",
+        "RAPTOR",
+        "CRAG",
+        "Adaptive RAG",
+        "Ragas Evaluation",
+        "Reciprocal Rank Fusion",
+        "Django Channels",
+        "WebSockets"
+      ],
+      "focus_keywords": [
+        "Composable RAG pipeline benchmark",
+        "Advanced RAG modules HyDE RAG Fusion RAPTOR CRAG",
+        "RAG research workspace with cited answers",
+        "Multi-LLM RAG evaluation with Ragas metrics",
+        "Open-source RAG benchmarking platform"
+      ],
+      "url": "https://rag.nevatal.id",
+      "tech_stack": [
+        "Django ASGI / Channels",
+        "React / Vite / Tailwind",
+        "Celery + Redis",
+        "PostgreSQL",
+        "OpenRouter (any model; defaults GPT-4o mini, Claude Haiku 4.5, Gemini 3 Flash)",
+        "BM25 + cosine similarity",
+        "Ollama cross-encoder reranker",
+        "Ragas + Instructor",
+        "WebSockets / SSE"
+      ],
+      "archive_reference": "archive/RagReader_PRD.md",
+      "architecture_reference": "archive/RagReader_Architecture.md",
+      "key_features": [
+        "13 composable RAG modules across routing, query rewriting, retrieval, refinement and generation — all can run together in one ordered pipeline",
+        "Deep-analysis matrix over Dense, Sparse and Hybrid retrieval with any OpenRouter model, configurable Top-K and live per-stage module traces",
+        "Module library: RRF Hybrid, HyDE, RAG Fusion, Step Back Prompting, MemoRAG, Self Route, Rewrite-Retrieve-Read, RAPTOR, Contextual Learning, LongRAG, FLARE, CRAG and Adaptive RAG",
+        "Persistent research workspace for PDF, DOCX, TXT, Markdown, web pages and pasted text, with resumable embedding checkpoints and cross-document conversations",
+        "Streamed answers with numbered citations that resolve to the document, page, character range and passage text",
+        "Automated ground truth via TREC-style RRF candidate pooling or manual chunk selection",
+        "Retrieval metrics Precision@K / Recall@K / F1@K plus Ragas Faithfulness, Response Relevance and Factual Correctness",
+        "Live analysis-flow visualisation with route decisions, module fallbacks, metric explanations and replayable results",
+        "Six public RAG courses and 28 lessons covering fundamentals, all 13 modules, evaluation and a capstone experiment"
+      ],
+      "use_cases": [
+        "AI engineers composing and benchmarking advanced RAG pipelines before production rollout",
+        "Researchers comparing retrieval and answer quality across documents, models and module combinations",
+        "Builders who want a self-hosted, cited document workspace and a transparent alternative to closed RAG SaaS"
+      ]
+    },
+    {
+      "id": "recommendica",
+      "name": "Recommendica - Academic Research, Courses & Free LaTeX Compiler Platform",
+      "container_names": [],
+      "short_description": "Comprehensive academic research and learning platform combining agentic arXiv paper discovery, structured educational courses, and a 100% free built-in LaTeX document compiler (Overleaf alternative).",
+      "category": "Academic Research & AI",
+      "tags": [
+        "Research Paper Recommender",
+        "LaTeX Compiler",
+        "Free LaTeX Editor",
+        "Overleaf Alternative",
+        "Academic Courses",
+        "arXiv API",
+        "Relevance Agent",
+        "Multi-Turn Agent",
+        "Query Expansion",
+        "FastAPI",
+        "React",
+        "Django"
+      ],
+      "focus_keywords": [
+        "Free LaTeX document compiler online",
+        "Free Overleaf alternative LaTeX compiler",
+        "AI research paper recommendation agent",
+        "Academic research courses and LaTeX editor",
+        "Live arXiv API fallback search"
+      ],
+      "url": "https://recommendica.nevatal.id",
+      "tech_stack": [
+        "Django / FastAPI",
+        "React Frontend",
+        "LaTeX Compiler Engine",
+        "ChromaDB",
+        "arXiv.org REST API",
+        "Paddle Billing Webhooks",
+        "OpenRouter",
+        "Docker Compose"
+      ],
+      "archive_reference": "archive/Recommendica_PRD.md",
+      "architecture_reference": "archive/Recommendica_Architecture.md",
+      "key_features": [
+        "Built-in Free LaTeX Document Compiler: Compile academic papers, research reports, and technical documents with instant PDF output and zero subscription fees (Overleaf alternative)",
+        "Integrated Free Academic Courses: Structured learning pathways, technical curriculum, and study modules for researchers, students, and engineers",
+        "Multi-turn Relevance Agent grading document relevancy and dynamically reformulating search queries across arXiv and scientific literature",
+        "Automatic live arXiv.org API fallback with compliant rate-limiting and circuit breakers when local coverage is low",
+        "Pre-retrieval query checker with fail-open circuit breakers preventing wasted API tokens",
+        "Parallel generation workers partition chunks into groups for low-latency streaming responses",
+        "Deterministic coverage statistics and faithfulness audits validating source document adherence",
+        "Integrated pay-what-you-want Paddle donation system with signature-verified idempotent webhooks",
+        "SEO-optimized noscript crawlable architecture for search engine discovery"
+      ],
+      "use_cases": [
+        "Writing, editing, and compiling LaTeX research papers completely free without Overleaf monthly subscription fees or compile timeout limits",
+        "Enrolling in free structured academic courses alongside cutting-edge scientific paper research",
+        "Academic and industry researchers discovering relevant scientific literature without semantic hallucination",
+        "Automated multi-paper literature reviews, citation synthesis, and academic drafting in a unified free suite"
+      ]
+    },
+    {
+      "id": "chattydesk",
+      "name": "Chattydesk - Universal Model Chat Client",
+      "container_names": [],
+      "short_description": "Unified chat interface and cross-platform client (Electron + Static Web) aggregating 400+ OpenRouter models with mid-conversation model switching and custom API key overrides.",
+      "category": "Developer Tools & AI Interface",
+      "tags": [
+        "OpenRouter Client",
+        "Electron Desktop App",
+        "React Web",
+        "Multi-Model Chat",
+        "JWT Auth",
+        "Markdown Renderer",
+        "Cross-Platform"
+      ],
+      "focus_keywords": [
+        "Universal OpenRouter chat client",
+        "Cross platform Electron AI desktop app",
+        "Mid conversation LLM model switching",
+        "Custom OpenRouter API key client"
+      ],
+      "url": "https://chatty.nevatal.id",
+      "tech_stack": [
+        "React / Vite",
+        "Electron",
+        "Django Backend",
+        "PostgreSQL / SQLite",
+        "OpenRouter 400+ Models API",
+        "JWT Authentication",
+        "Tailwind CSS"
+      ],
+      "archive_reference": "archive/Chattydesk_PRD.md",
+      "architecture_reference": "archive/Chattydesk_Architecture.md",
+      "key_features": [
+        "Single unified interface across 400+ frontier and open-source models via OpenRouter",
+        "Compare AI: Side-by-side multi-model arena broadcasting prompts across 2 to 4 models simultaneously",
+        "Interactive AI Academy & \"AI-Ready Website\" courses covering prompt design and multi-agent systems",
+        "Conversation memory management with custom context windows and mid-conversation model switching",
+        "Custom OpenRouter API key overrides in user settings with zero server credit dependencies",
+        "Paddle payment checkout overlay for subscription tiers and usage quota upgrades",
+        "Automatic shuffled free-model failover when account balance or API credits expire",
+        "Autonomous agent readiness endpoints (/.well-known/ard.json, /poppy.json, /llms.txt)"
+      ],
+      "use_cases": [
+        "Developers and power users comparing outputs across dozens of AI models in a single unified interface",
+        "Desktop power-users wanting a dedicated native client for frontier AI models without multiple browser tabs",
+        "Cost-effective AI chat with user-provided API key support"
+      ]
+    },
+    {
+      "id": "ai-systems-portfolio",
+      "name": "Nevatal Defense-in-Depth AI Systems Suite",
+      "container_names": [],
+      "short_description": "Comprehensive portfolio and technical overview of ten defense-in-depth applications: DivinityAI, CRAG MultiHop, RagReader, Recommendica, Chattydesk, VoltQuest, Interviewer, Furina ML, Webisaurus, and Uptime Medics.",
+      "category": "Artificial Intelligence & Architecture",
+      "tags": [
+        "AI Architecture",
+        "Portfolio",
+        "Defense-in-Depth RAG",
+        "System Design",
+        "Multi-LLM",
+        "ChromaDB",
+        "Full Stack AI"
+      ],
+      "focus_keywords": [
+        "Advanced RAG architecture portfolio",
+        "Defense in depth agentic AI systems",
+        "Full stack AI engineering case studies",
+        "Multi LLM consensus and verification architecture"
+      ],
+      "url": "https://chat.nevatal.id",
+      "tech_stack": [
+        "Python (Django ASGI / FastAPI)",
+        "React / Electron",
+        "Rust (Axum)",
+        "ChromaDB",
+        "PostgreSQL / Redis / Celery",
+        "OpenRouter Multi-Model",
+        "Docker Compose"
+      ],
+      "archive_reference": "archive/Portfolio_PRD.md",
+      "key_features": [
+        "Unified defense-in-depth architectural paradigm for agentic and RAG systems across ten production applications",
+        "Multi-stage intent routing, HyDE, BM25, and dense vector embeddings",
+        "Automated benchmarking, 3x3 consensus evaluation, and RRF pooling",
+        "Deterministic citation verification, data leakage isolation, and SSRF defense-in-depth",
+        "Cross-platform distribution across desktop, web, embedded Rust, and Web Workers"
+      ],
+      "use_cases": [
+        "Technical portfolio showcase demonstrating modern AI engineering practices",
+        "Architectural reference for building robust, verifiable enterprise RAG pipelines"
+      ],
+      "architecture_reference": "archive/Portfolio_Architecture.md"
+    },
+    {
+      "id": "country-sdg",
+      "name": "Country SDG Profiles",
+      "container_names": [
+        "country-sdg-web-1"
+      ],
+      "short_description": "Data-driven visualization and analysis platform tracking progress across all 17 UN Sustainable Development Goals for 166 countries.",
+      "category": "Data & Sustainability",
+      "tags": [
+        "Sustainable Development Goals",
+        "SDG Index",
+        "Data Visualization",
+        "Django",
+        "Global Development",
+        "Data Analytics"
+      ],
+      "focus_keywords": [
+        "Sustainable Development Goals tracking platform",
+        "UN SDG country performance analysis",
+        "Global development data visualization Django",
+        "17 Sustainable Development Goals metrics"
+      ],
+      "port": 9011,
+      "url": "https://sdg.nevatal.id",
+      "tech_stack": [
+        "Django 5",
+        "Python",
+        "Chart.js / Data Visualization",
+        "Docker",
+        "CSV Data Engine"
+      ],
+      "archive_reference": "archive/Country_SDG_PRD.md",
+      "architecture_reference": "archive/Country_SDG_Architecture.md",
+      "key_features": [
+        "Complete coverage of all 17 Sustainable Development Goals across 166 countries",
+        "Historical trajectory and trends from 2000 through 2022",
+        "Global ranking, regional averages, and quartile performance indicators",
+        "Fast zero-external-service architecture relying on clean internal CSV pipelines",
+        "Interactive sparklines and trend charts for each goal"
+      ],
+      "use_cases": [
+        "Policy research and international development benchmarking",
+        "Academic analysis of SDG progress and sustainability gaps",
+        "ESG reporting and country-level risk assessment",
+        "Public education and data journalism"
+      ]
+    },
+    {
+      "id": "literal-storyboard",
+      "name": "Literal Storyboard",
+      "container_names": [
+        "literal-storyboard-app-1"
+      ],
+      "short_description": "AI-powered game development tool created for the AWS Game Builder Hackathon combining dynamic AI storytelling, fantasy map navigation, and sentiment mechanics.",
+      "category": "Game Development & AI",
+      "tags": [
+        "AI Game Development",
+        "OpenRouter",
+        "Fantasy Map Generator",
+        "Sentiment Analysis",
+        "AWS Hackathon",
+        "Interactive Storytelling"
+      ],
+      "focus_keywords": [
+        "AI storytelling game development tool",
+        "Dynamic NPC sentiment game mechanics",
+        "OpenRouter LLM game engine",
+        "AWS Game Builder Hackathon project"
+      ],
+      "port": 6060,
+      "url": "https://story.nevatal.id/",
+      "github": "https://github.com/thirza258/literal-storyboard",
+      "tech_stack": [
+        "React / Vite",
+        "OpenRouter Multi-Model API",
+        "Fantasy Map Generator SVG",
+        "Docker Compose",
+        "Tailwind CSS"
+      ],
+      "archive_reference": "archive/Literal_Storyboard_PRD.md",
+      "architecture_reference": "archive/Literal_Storyboard_Architecture.md",
+      "key_features": [
+        "Real-time procedural story beat and choice generation per city",
+        "On-the-fly scenery background painting fading dynamically behind gameplay",
+        "Sentiment-as-game-mechanic: AI evaluates tone to alter faction standing and win/loss conditions",
+        "Snake-and-ladder style board mechanics over procedural fantasy maps",
+        "Graceful offline fallback with bundled stories when API keys are absent"
+      ],
+      "use_cases": [
+        "Interactive fiction and tabletop RPG digital assistants",
+        "Game developer prototyping for dynamic branching narrative systems",
+        "Gamified education and interactive language learning simulations",
+        "Showcase of multi-model LLM integration in web gaming"
+      ]
+    },
+    {
+      "id": "genshinwallcraft",
+      "name": "GenshinWallCraft",
+      "container_names": [
+        "genshinwallgen-frontend-1",
+        "genshinwallgen-backend-1",
+        "genshinwallgen-minio-1"
+      ],
+      "short_description": "High-performance wallpaper generator creating task-overlay productivity wallpapers with FastAPI, React, and MinIO object storage.",
+      "category": "Web Tools & Multimedia",
+      "tags": [
+        "Wallpaper Generator",
+        "FastAPI",
+        "React",
+        "MinIO Storage",
+        "Productivity Tools",
+        "Docker Microservices"
+      ],
+      "focus_keywords": [
+        "Task overlay wallpaper generator",
+        "FastAPI MinIO microservice architecture",
+        "Custom productivity desktop wallpaper maker",
+        "Automated image generation web app"
+      ],
+      "ports": [
+        5155,
+        8009,
+        9000
+      ],
+      "url": "https://genshinwallpaper.nevatal.id",
+      "tech_stack": [
+        "FastAPI Backend",
+        "React + Nginx Frontend",
+        "MinIO S3-Compatible Object Storage",
+        "Docker Compose",
+        "Pillow / Image Processing"
+      ],
+      "archive_reference": "archive/GenshinWallCraft_PRD.md",
+      "architecture_reference": "archive/GenshinWallCraft_Architecture.md",
+      "key_features": [
+        "Anonymous mode for instant generation and downloads",
+        "Authenticated mode with persistent user tasks, generation history, and private galleries",
+        "MinIO object storage integration for scalable media asset persistence",
+        "High-resolution canvas rendering and task layout compositing",
+        "Zero-hassle single-command Docker deployment"
+      ],
+      "use_cases": [
+        "Daily desktop productivity wallpapers with prioritized todo lists",
+        "Aesthetic desktop customization for developers and students",
+        "Microservice reference architecture combining FastAPI with MinIO storage"
+      ]
+    },
+    {
+      "id": "gemini-japanese",
+      "name": "Gemini Japanese Learning & Translator",
+      "container_names": [
+        "gemini_japanese-frontend-1"
+      ],
+      "short_description": "AI-powered Japanese language learning and translation platform with OpenRouter integration and AES-256 encrypted proxy security.",
+      "category": "Education & Language Learning",
+      "tags": [
+        "Japanese Learning",
+        "AI Language Tutor",
+        "OpenRouter",
+        "React Vite",
+        "AWS Amplify",
+        "AES-256 Encryption"
+      ],
+      "focus_keywords": [
+        "AI Japanese language learning platform",
+        "OpenRouter Japanese translation tool",
+        "Encrypted reverse proxy LLM security",
+        "AI language tutor web application"
+      ],
+      "port": 5175,
+      "url": "https://hira.nevatal.id",
+      "tech_stack": [
+        "React + Vite",
+        "AWS Amplify",
+        "OpenRouter API (Gemma / Gemini)",
+        "AES-256-GCM Encryption",
+        "Nginx Reverse Proxy"
+      ],
+      "archive_reference": "archive/Gemini_Japanese_PRD.md",
+      "architecture_reference": "archive/Gemini_Japanese_Architecture.md",
+      "key_features": [
+        "Contextual Japanese grammar explanation and vocabulary breakdowns",
+        "Zero browser-exposed API keys via server-side reverse proxy with AES-256-GCM encryption",
+        "Seamless model switching across OpenRouter models (Gemma, Gemini, Claude)",
+        "Real-time Japanese-to-English and English-to-Japanese conversational practice",
+        "Clean, responsive modern UI built with Vite and Tailwind"
+      ],
+      "use_cases": [
+        "Self-paced JLPT preparation and grammar practice",
+        "Contextual translation for reading manga and Japanese light novels",
+        "Secure enterprise deployment pattern for frontends calling LLM APIs"
+      ]
+    },
+    {
+      "id": "videotex",
+      "name": "VideoTex",
+      "container_names": [
+        "videotex-web-1"
+      ],
+      "short_description": "Automated video text extraction, speech-to-text transcription, and subtitle processing web platform.",
+      "category": "Video & Audio Processing",
+      "tags": [
+        "Video Processing",
+        "Speech to Text",
+        "Subtitle Generator",
+        "Django",
+        "PostgreSQL",
+        "Video Analysis"
+      ],
+      "focus_keywords": [
+        "Automated video text extraction tool",
+        "AI speech to text subtitle generator",
+        "Django video processing platform",
+        "Video transcript indexing and search"
+      ],
+      "url": "https://video.nevatal.id",
+      "tech_stack": [
+        "Django",
+        "PostgreSQL",
+        "Docker Compose",
+        "Speech-to-Text Engine",
+        "FFmpeg"
+      ],
+      "archive_reference": "archive/VideoTex_PRD.md",
+      "architecture_reference": "archive/VideoTex_Architecture.md",
+      "key_features": [
+        "Automated transcription and timestamped subtitle generation",
+        "Key text extraction from on-screen video frames",
+        "Full-text search inside video content and transcripts",
+        "REST API and web dashboard for video file management"
+      ],
+      "use_cases": [
+        "Content creators generating subtitles and transcripts automatically",
+        "Educational video lecture indexing and note-taking",
+        "Media monitoring and spoken content indexing"
+      ]
+    },
+    {
+      "id": "nevatal-url-shortener",
+      "name": "Nevatal URL Shortener",
+      "container_names": [],
+      "short_description": "Production-ready URL shortening microservice with Redis caching, PostgreSQL persistence, click analytics, and rate limiting.",
+      "category": "Web Infrastructure",
+      "tags": [
+        "URL Shortener",
+        "Django",
+        "Redis Cache",
+        "PostgreSQL",
+        "Link Analytics",
+        "Rate Limiting"
+      ],
+      "focus_keywords": [
+        "Django URL shortener with Redis caching",
+        "High performance link shortener microservice",
+        "Custom slug URL shortener analytics",
+        "Production Django Docker architecture"
+      ],
+      "url": "https://url.nevatal.id",
+      "tech_stack": [
+        "Django 5",
+        "PostgreSQL 16",
+        "Redis 7",
+        "Nginx",
+        "Docker Compose",
+        "Bootstrap 5"
+      ],
+      "archive_reference": "archive/URL_Shortener_PRD.md",
+      "architecture_reference": "archive/URL_Shortener_Architecture.md",
+      "key_features": [
+        "Custom slug generation with database-level uniqueness validation",
+        "Ultra-low latency redirects powered by Redis caching layer",
+        "Detailed click analytics, referrer tracking, and dashboard stats",
+        "IP-based rate limiting with graceful 429 backoff handling",
+        "Production Dockerized deployment with isolated network bridges"
+      ],
+      "use_cases": [
+        "Branded marketing link management and campaign tracking",
+        "Internal microservice URL routing and API endpoint aliasing",
+        "Fast link analytics and traffic attribution"
+      ]
+    },
+    {
+      "id": "voltquest",
+      "name": "VoltQuest - Gamified Electronics Lab & MCU Simulator",
+      "container_names": [],
+      "short_description": "Gamified browser-based electronics laboratory and microcontroller simulator with real-time Modified Nodal Analysis (MNA) physics, sticky damage mechanics, Monaco/Blockly code editing, and simulated IoT networking.",
+      "category": "Electronics & Educational Tech",
+      "tags": [
+        "Electronics Simulator",
+        "MCU Simulator",
+        "Arduino",
+        "ESP32",
+        "Raspberry Pi GPIO",
+        "Modified Nodal Analysis",
+        "Circuit Simulation",
+        "Gamified Learning",
+        "Web Worker VM",
+        "FastAPI"
+      ],
+      "focus_keywords": [
+        "Gamified electronics laboratory MCU simulator",
+        "In browser circuit simulator Modified Nodal Analysis",
+        "Arduino ESP32 browser simulator",
+        "Virtual breadboard and electronics lab"
+      ],
+      "url": "https://pcb.nevatal.id",
+      "tech_stack": [
+        "React 18 / Vite",
+        "FastAPI (Python 3.12)",
+        "Web Workers",
+        "Modified Nodal Analysis (MNA) Solver",
+        "Monaco Editor & Blockly",
+        "PostgreSQL 16 / SQLite",
+        "Model Context Protocol (MCP)",
+        "Docker Compose"
+      ],
+      "archive_reference": "archive/VoltQuest_PRD.md",
+      "architecture_reference": "archive/VoltQuest_Architecture.md",
+      "key_features": [
+        "Modified Nodal Analysis (MNA) in-browser DC circuit solver with sticky damage mechanics and magic smoke effects",
+        "Dual Monaco C++ and Blockly visual programming with Web Worker virtual clock VM handling millis() and micros()",
+        "Multi-MCU simulation ecosystem: Arduino Uno/Nano (AVR), ESP32/ESP32-S3 (VoltNet Wi-Fi & MQTT), Raspberry Pi 4/5 Python GPIO",
+        "20-quest campaign across 5 worlds: fundamentals, sensor rhythms, 3.3V power swaps, ESP32 IoT, and quad-X drone flight",
+        "Custom drone builder bench (/sandbox?bench=drone) with flight simulator, blackbox telemetry, and BOM export",
+        "Advanced systems engineering courses: Kubernetes Architecture, Linux Kernel Programming, and Microcontroller Labs",
+        "Model Context Protocol (MCP) server integration at /api/mcp/ for autonomous AI coding agents",
+        "Authentic serial monitor with baud rate garbling simulation and slide-out virtual IoT smartphone"
+      ],
+      "use_cases": [
+        "Electronics beginners and STEM students learning circuit theory and embedded C++ without frying physical hardware",
+        "Educators conducting interactive online workshops and classroom embedded systems curricula",
+        "Hardware makers prototyping microcontroller pinouts, logic-level shifting, and BOM costs before ordering parts",
+        "AI coding agents designing, verifying, and troubleshooting circuits via Model Context Protocol (MCP)"
+      ]
+    },
+    {
+      "id": "interviewer",
+      "name": "My Mock Interview - AI Tailored Interview Platform",
+      "container_names": [],
+      "short_description": "Automated AI mock interview platform featuring a 7-agent LLM pipeline that performs JD parsing, resume gap analysis, tailored question sequencing, and real-time rubric evaluation.",
+      "category": "Artificial Intelligence & Career Tech",
+      "tags": [
+        "AI Mock Interview",
+        "Multi-Agent System",
+        "Resume Gap Analysis",
+        "Job Description Parser",
+        "FastAPI",
+        "React 19",
+        "PostgreSQL",
+        "MinIO",
+        "Rubric Evaluation"
+      ],
+      "focus_keywords": [
+        "AI tailored mock interview platform",
+        "Multi agent resume gap analysis interview",
+        "Automated interview preparation rubric scoring",
+        "Personalized technical mock interview AI"
+      ],
+      "url": "https://interview.nevatal.id",
+      "tech_stack": [
+        "FastAPI (Python 3.12)",
+        "React 19 / Vite SPA",
+        "SQLAlchemy 2.0 / asyncpg",
+        "PostgreSQL 16",
+        "MinIO S3 Storage",
+        "OpenRouter Multi-Model Inference",
+        "Docker Compose",
+        "Nginx"
+      ],
+      "archive_reference": "archive/Interviewer_PRD.md",
+      "architecture_reference": "archive/Interviewer_Architecture.md",
+      "key_features": [
+        "7-agent sequential preparation and evaluation pipeline (JD Parser, Resume Analyzer, Gap Analysis, Spec Builder, Question Generator, Answer Evaluator, Final Reviewer)",
+        "Multi-mode interview support: In-depth Technical engineering mode and HR Behavioral mode using STAR methodology",
+        "Turn-by-turn rubric evaluation scoring Technical Depth (0-10) and Communication Clarity (0-10) with actionable feedback",
+        "Production MinIO S3 object storage for candidate resumes, session snapshots, and evaluation dossiers",
+        "WebMCP architecture endpoints enabling autonomous agents to initiate interviews and receive evaluations",
+        "Automatic shuffled free-model failover preventing session drops on credit exhaustion",
+        "Executive scorecard aggregate report with composite score (0-100) and hiring recommendation"
+      ],
+      "use_cases": [
+        "Job seekers preparing for specific technical roles with customized questions targeting their actual resume gaps",
+        "Career switchers practicing behavioral and system design interview scenarios with objective scoring",
+        "Engineering candidates benchmarking their technical clarity and concise delivery against industry rubrics"
+      ]
+    },
+    {
+      "id": "furina-ml",
+      "name": "Furina ML - No-Code Machine Learning Workbench",
+      "container_names": [],
+      "short_description": "Web-based no-code machine learning workbench for tabular data, training real Scikit-Learn, XGBoost, and LightGBM models inside leak-free pipelines with full .joblib artifact export.",
+      "category": "Machine Learning & Data Science",
+      "tags": [
+        "No-Code Machine Learning",
+        "Scikit-Learn",
+        "XGBoost",
+        "LightGBM",
+        "Data Leakage Prevention",
+        "Model Evaluation",
+        "Tabular Data",
+        "Joblib Export",
+        "FastAPI",
+        "React"
+      ],
+      "focus_keywords": [
+        "No code machine learning workbench",
+        "Leak free tabular ML pipeline builder",
+        "Scikit learn XGBoost LightGBM no code",
+        "Automated machine learning model evaluation"
+      ],
+      "url": "https://furina.nevatal.id",
+      "tech_stack": [
+        "FastAPI (Python 3.12)",
+        "Scikit-Learn",
+        "XGBoost",
+        "LightGBM",
+        "Pandas / NumPy",
+        "React / Vite",
+        "Docker Compose"
+      ],
+      "archive_reference": "archive/Furina_ML_PRD.md",
+      "architecture_reference": "archive/Furina_ML_Architecture.md",
+      "key_features": [
+        "Zero simulation: trains real Scikit-Learn (17 estimators), XGBoost, and LightGBM models on uploaded CSVs (up to 50 MB)",
+        "Leak-free Scikit-Learn pipelines bundling preprocessing (imputation, scaling, one-hot encoding) fitted strictly on training splits",
+        "Visual non-destructive data cleaning recipes producing versioned derived datasets with instant dry-run previews",
+        "Exhaustive evaluation suites: train vs. test overfitting audits, multi-class confusion matrices, ROC-AUC, regression error curves",
+        "One-click standalone .joblib model binary export ready for external production deployment without platform dependencies",
+        "Interactive in-browser prediction form enabling live inference testing on newly trained models",
+        "Privacy-first OpenRouter AI assistant providing tuning and cleaning advice strictly based on column metadata and summary statistics"
+      ],
+      "use_cases": [
+        "Data scientists and analysts quickly prototyping baseline models on tabular datasets without writing boilerplate Python",
+        "Clinicians, researchers, and domain experts evaluating predictive algorithms on empirical data without coding",
+        "Developers needing exportable production-grade .joblib pipelines trained without subtle data leakage"
+      ]
+    },
+    {
+      "id": "webisaurus",
+      "name": "Webisaurus - Polyglot Syntax Reference & Code Comparator",
+      "container_names": [
+        "webisaurus_web"
+      ],
+      "port": 10090,
+      "short_description": "Ultra-fast zero-backend polyglot syntax reference and multi-language side-by-side code comparator indexing 140 programming languages across 24 core syntax concepts (3,360 snippets).",
+      "category": "Developer Tools & Programming",
+      "tags": [
+        "Polyglot Programming",
+        "Syntax Comparator",
+        "Code Comparison",
+        "PrismJS",
+        "PWA",
+        "Offline First",
+        "Zero-Backend",
+        "Command Palette",
+        "Nginx Alpine"
+      ],
+      "focus_keywords": [
+        "Polyglot syntax reference code comparator",
+        "Side by side programming language comparison",
+        "Multi language code syntax cheatsheet",
+        "140 programming languages syntax reference"
+      ],
+      "url": "https://c.nevatal.id",
+      "tech_stack": [
+        "HTML5 / Vanilla CSS / ES6+ Modules",
+        "Prism.js",
+        "Service Worker (Cache API)",
+        "Nginx Alpine (< 25 MB RAM)",
+        "Docker"
+      ],
+      "archive_reference": "archive/Webisaurus_PRD.md",
+      "architecture_reference": "archive/Webisaurus_Architecture.md",
+      "key_features": [
+        "Zero-backend, zero-build polyglot syntax reference cataloging 140 programming languages across 24 core syntax concepts (3,360 idiomatic snippets)",
+        "Multi-language side-by-side code comparator with 2-to-3 column reflow, slot swapping, and shareable URLs",
+        "Global keyboard-first command palette (Ctrl+K / Cmd+K / /) with unified fuzzy search",
+        "Two-tier in-memory and localStorage caching with quota management and offline PWA service worker",
+        "Direct launcher links to official browser sandboxes (Rust Playground, Go Playground, TypeScript Sandbox, Compiler Explorer Godbolt)",
+        "OLED True Black and Pure White utilitarian design system adhering to WCAG 2.1 AA standards",
+        "Comprehensive browse-all 3,360 snippet catalog view with instant category and concept filtering"
+      ],
+      "use_cases": [
+        "Polyglot engineers and systems programmers quickly looking up syntax equivalents when context-switching languages",
+        "Developers transitioning from one language to another (e.g. Python to Go, or JavaScript to Rust) comparing idiomatic constructs",
+        "Educators and computer science students learning language paradigms and comparing control flow implementations",
+        "Developers needing an offline-capable syntax reference during travel or in air-gapped environments"
+      ]
+    },
+    {
+      "id": "uptime-medics",
+      "name": "Uptime Medics - High-Performance Uptime & Incident Monitoring",
+      "container_names": [
+        "uptime-medics"
+      ],
+      "port": 10080,
+      "short_description": "Lightweight, high-performance distributed uptime and incident monitoring platform written in Rust (Axum + Tokio + SQLite WAL) with zero-signup public community pools and defense-in-depth SSRF protection.",
+      "category": "DevOps & Infrastructure",
+      "tags": [
+        "Uptime Monitoring",
+        "Rust",
+        "Axum",
+        "Tokio",
+        "SSRF Defense",
+        "SQLite WAL",
+        "Incident Management",
+        "Health Checks",
+        "DNS Rebinding Protection"
+      ],
+      "focus_keywords": [
+        "High performance Rust uptime monitoring",
+        "Zero signup community uptime monitor",
+        "SSRF protected API health check monitor",
+        "Lightweight self hosted uptime service Rust"
+      ],
+      "url": "https://uptime.nevatal.id",
+      "tech_stack": [
+        "Rust 1.82+ (Axum 0.8 / Tokio 1)",
+        "Reqwest 0.12",
+        "SQLx 0.8 / SQLite WAL Mode",
+        "Lettre 0.11 (SMTP)",
+        "Argon2id + JWT",
+        "rust-embed",
+        "Docker"
+      ],
+      "archive_reference": "archive/Uptime_Medics_PRD.md",
+      "architecture_reference": "archive/Uptime_Medics_Architecture.md",
+      "key_features": [
+        "Single-binary Rust platform (axum 0.8 + tokio 1 + reqwest 0.12 + SQLite in WAL mode) consuming under 30 MB RAM",
+        "Zero-signup public community monitoring pool with 10-second juggler rotation",
+        "Multi-method HTTP probing (HEAD, GET, POST, PATCH, PUT, DELETE, OPTIONS) with custom headers and 64 KB payloads",
+        "Multi-layer SSRF defense with filtering DNS resolver defeating DNS rebinding and redirect hop inspection",
+        "2-failure incident state machine with flapping suppression and batched SQLite write buffering",
+        "Argon2id and JWT authenticated user dashboard for private multi-endpoint monitoring"
+      ],
+      "use_cases": [
+        "DevOps engineers and indie hackers needing ultra-lean, reliable uptime monitoring without commercial paywalls or RAM bloat",
+        "Public API and web service operators providing transparent status tracking without requiring user registrations",
+        "Self-hosted server environments demanding hardened SSRF protection against malicious internal network probing"
+      ]
+    },
+    {
+      "id": "discord-server-bot",
+      "name": "Discord Server Bot - Infrastructure Monitoring & AI Assistant",
+      "container_names": [
+        "discord-gpt-bot"
+      ],
+      "short_description": "Operations monitoring, automated maintenance, and AI community engagement agent running natively on Discord with Docker socket telemetry, HTTP health checks, and OpenAI GPT-4o integration.",
+      "category": "DevOps & Community Tools",
+      "tags": [
+        "Discord Bot",
+        "Docker Monitoring",
+        "Infrastructure Monitoring",
+        "psutil",
+        "OpenAI GPT-4o",
+        "DALL-E-3",
+        "Automated Backups",
+        "discord.py"
+      ],
+      "focus_keywords": [
+        "Discord infrastructure monitoring bot",
+        "Docker container alerting Discord bot",
+        "AI community assistant Discord GPT-4o",
+        "Automated server maintenance Discord bot"
+      ],
+      "url": "https://discord.com",
+      "github": "https://github.com/thirza258/discord-server-bot",
+      "tech_stack": [
+        "Python 3.12",
+        "discord.py",
+        "Docker Engine Socket API",
+        "psutil",
+        "aiohttp",
+        "OpenAI API (GPT-4o / DALL-E-3)",
+        "Docker Compose"
+      ],
+      "archive_reference": "archive/Discord_Server_Bot_PRD.md",
+      "architecture_reference": "archive/Discord_Server_Bot_Architecture.md",
+      "key_features": [
+        "Real-time Docker socket monitoring tracking container status, memory usage, and firing sub-minute crash alerts to Discord",
+        "Continuous HTTP endpoint health checks probing web applications and reporting response latencies and HTTP error codes",
+        "Visual host telemetry displaying CPU, RAM, disk space, and network I/O with ASCII progress bars inside Discord embeds",
+        "Automated background maintenance periodically pruning dangling Docker images and creating compressed database backups",
+        "AI community assistant powered by OpenAI GPT-4o and DALL-E-3 for conversational tech troubleshooting and image generation",
+        "Interactive multiple-choice coding quizzes rendered with Discord UI button components and instant score grading",
+        "Scheduled daily morning digest embeds summarizing infrastructure stability and active container metrics"
+      ],
+      "use_cases": [
+        "Solo developers and server administrators monitoring self-hosted VPS servers directly from Discord without opening SSH",
+        "Developer community managers keeping tech Discord servers engaged with automated daily briefings and interactive coding quizzes",
+        "DevOps teams wanting zero-cost instant notification channels for Docker container crashes and HTTP service degradation"
+      ]
+    },
+    {
+      "id": "nevatal-cloud",
+      "name": "Nevatal Cloud (Proxmox VE Control Plane & VPS Orchestrator)",
+      "container_names": [
+        "nevatal-cloud-frontend",
+        "nevatal-cloud-backend",
+        "nevatal-cloud-postgres",
+        "nevatal-cloud-redis"
+      ],
+      "short_description": "Self-hosted cloud control plane and virtualization orchestrator managing Proxmox VE clusters, automated VPS provisioning via WooCommerce, and customer cloud portals on Dell PowerEdge R640 bare-metal nodes.",
+      "category": "Cloud Infrastructure & Virtualization",
+      "tags": [
+        "Nevatal Cloud",
+        "Proxmox VE",
+        "VPS Orchestrator",
+        "WooCommerce VPS",
+        "Cloud-Init",
+        "Go API",
+        "PostgreSQL",
+        "Redis",
+        "Dell PowerEdge R640",
+        "DevOps"
+      ],
+      "focus_keywords": [
+        "Nevatal Cloud Proxmox VE control plane",
+        "Automated VPS provisioning with WooCommerce and Proxmox",
+        "Self-hosted cloud infrastructure orchestrator",
+        "Dell PowerEdge R640 virtualization management"
+      ],
+      "url": "https://cloud.nevatal.id",
+      "tech_stack": [
+        "Go (Golang) 1.23",
+        "React 19 / TypeScript",
+        "Proxmox VE API",
+        "PostgreSQL 16",
+        "Redis 7",
+        "Docker Compose",
+        "WordPress / WooCommerce Plugin"
+      ],
+      "archive_reference": "archive/Nevatal_Cloud_PRD.md",
+      "architecture_reference": "archive/Nevatal_Cloud_Architecture.md",
+      "key_features": [
+        "Proxmox VE hypervisor automation cloning QEMU templates, configuring Cloud-Init IP/SSH, and booting instances programmatically",
+        "WordPress & WooCommerce plugin (nevatal-cloud-manager) automating VPS delivery immediately upon customer checkout",
+        "Client portal shortcode [nevatal_instances] enabling users to reboot, terminate, and monitor their virtual machines from WordPress",
+        "Enterprise Dell PowerEdge R640 telemetry surfacing CPU core loads, memory allocation, and storage pools in real time",
+        "Secure Go backend with JWT authentication, RBAC access controls, and rate-limited Proxmox API connection pooling"
+      ],
+      "use_cases": [
+        "Web hosting providers and agencies selling virtual private servers with automated fulfillment through WooCommerce",
+        "Engineering teams managing internal development and staging virtual machines on private on-premise Proxmox hardware",
+        "Developers requiring an independent, self-hosted AWS/DigitalOcean alternative with zero monthly hypervisor license fees"
+      ]
+    },
+    {
+      "id": "decalove",
+      "name": "Decalove - AI-Directed Visual Novel Game",
+      "container_names": [],
+      "short_description": "AI-directed visual novel game combining Ren'Py client with a FastAPI story engine, where an AI Director generates dynamic narrative beats, tracks character relationships, and adapts in real-time to player choice.",
+      "category": "Gaming & AI Storytelling",
+      "tags": [
+        "Visual Novel",
+        "AI Story Engine",
+        "Ren'Py",
+        "FastAPI",
+        "AI Director",
+        "Semantic Memory",
+        "Dynamic Narrative"
+      ],
+      "focus_keywords": [
+        "AI directed visual novel game",
+        "AI story engine RenPy FastAPI",
+        "Dynamic narrative game with AI",
+        "Free AI visual novel alternative"
+      ],
+      "url": "https://nevatal.id",
+      "github": "",
+      "tech_stack": [
+        "Ren'Py Client",
+        "FastAPI Backend",
+        "Python 3.12",
+        "OpenRouter LLM",
+        "Vector Semantic Memory",
+        "Image Generation",
+        "Docker"
+      ],
+      "archive_reference": "archive/Decalove_PRD.md",
+      "key_features": [
+        "AI Agent Story Engine generating dynamic story beats ahead of player progress so seams never show",
+        "Dual player interaction: choose authored branching options or type natural language prose",
+        "Persistent character relationship, emotional state, and semantic memory tracking",
+        "Director state machine dynamically steering pacing, tension, and character stances",
+        "Authored high school romance MVP world with 4 characters, 8 locations, and 5 story arcs",
+        "Decoupled architecture: pure Python client with asynchronous FastAPI backend"
+      ],
+      "use_cases": [
+        "Playing dynamic narrative visual novels with emergent AI-driven storylines",
+        "Interactive creative writing and adaptive RPG dialogue exploration"
+      ]
+    },
+    {
+      "id": "leetbug",
+      "name": "LeetBug - Debugging & Troubleshooting Evaluation Platform",
+      "container_names": [],
+      "short_description": "Innovative developer evaluation and learning platform inverting competitive programming by focusing exclusively on debugging, system troubleshooting, and AI-human collaboration.",
+      "category": "Developer Tools & Education",
+      "tags": [
+        "Code Debugging",
+        "Competitive Programming",
+        "Prompt Engineering",
+        "CodeSandbox",
+        "Technical Assessment",
+        "FastAPI",
+        "React"
+      ],
+      "focus_keywords": [
+        "Code debugging evaluation platform",
+        "LeetCode alternative for debugging",
+        "AI prompt engineering code troubleshooting",
+        "Free developer debugging practice"
+      ],
+      "url": "https://leetbug.nevatal.id",
+      "github": "",
+      "tech_stack": [
+        "React 19 Frontend",
+        "FastAPI / Python Backend",
+        "Docker Isolated Sandbox",
+        "PostgreSQL",
+        "OpenRouter LLM",
+        "Monaco Code Editor"
+      ],
+      "archive_reference": "archive/LeetBug_PRD.md",
+      "key_features": [
+        "Debug-first problem library covering Runtime, Logic, and Business Flow errors",
+        "Dual resolution paths: manual code editor fixing or technical AI prompt engineering",
+        "Isolated execution sandbox evaluating unit tests and runtime state assertions",
+        "Analytical diagnostic metrics scoring bug identification speed and prompt precision",
+        "Real-world legacy codebase simulations mimicking production incident troubleshooting",
+        "Community bug submission and automated test harness validation"
+      ],
+      "use_cases": [
+        "Training software engineers on real-world code analysis and root-cause debugging",
+        "Benchmarking AI coding assistant prompt engineering and code review efficacy"
+      ]
+    },
+    {
+      "id": "quanta",
+      "name": "Quanta LMS - Computational Finance Academy & Trading Simulator",
+      "container_names": [],
+      "short_description": "Open-source, university-accredited standard LMS for computational finance and algorithmic trading, combining an institutional lecture hall with an in-browser Python execution lab and TradingView paper trading simulator.",
+      "category": "FinTech & Quantitative Education",
+      "tags": [
+        "Computational Finance",
+        "Algorithmic Trading",
+        "Trading Simulator",
+        "Quantitative LMS",
+        "Factor Investing",
+        "Python Monaco",
+        "KaTeX"
+      ],
+      "focus_keywords": [
+        "Computational finance learning management system",
+        "Algorithmic trading paper simulator online",
+        "MFE quantitative finance academy",
+        "Free quantitative trading LMS alternative"
+      ],
+      "url": "https://quant.nevatal.id",
+      "github": "",
+      "tech_stack": [
+        "React 18+ Frontend",
+        "KaTeX Math Engine",
+        "Monaco Python Editor",
+        "TradingView Lightweight Charts",
+        "Python 3.11 Kernel",
+        "FastAPI / WebSockets",
+        "PostgreSQL 16"
+      ],
+      "archive_reference": "archive/Quanta_PRD.md",
+      "key_features": [
+        "Dual-pane lecture hall: university-level financial proofs (KaTeX) synchronized with a live Python Monaco lab",
+        "TradingView-style stock trading simulator with order book matching, DOM, and margin leverage",
+        "6 comprehensive curriculum tracks: Graham & Dodd valuation, factor investing, econometrics, algorithmic trading, ML alpha models, and DeFi AMMs",
+        "Institutional \"Substance Over Decoration\" typography and low-latency (<1.5s) financial analysis execution",
+        "Continuous double-auction exchange matching engine supporting Market, Limit, Stop, and Bracket orders",
+        "Automated multi-agent LLM fundamental equity analysis and backtesting modules"
+      ],
+      "use_cases": [
+        "MFE, MBA, and CFA candidates mastering quantitative finance and balance sheet deconstruction",
+        "Quantitative researchers backtesting factor strategies and trading algorithms in a sandboxed simulator"
+      ]
+    },
+    {
+      "id": "whatsapp-api-channel",
+      "name": "OpenClaw WhatsApp API Channel & Daily Social Dispatcher",
+      "container_names": [],
+      "short_description": "Outbound daily social media post generator and private WhatsApp delivery dispatcher for OpenClaw, enforcing strict inbound chat lockdown while providing ready-to-publish copy kits.",
+      "category": "Automation & Social Media",
+      "tags": [
+        "WhatsApp Automation",
+        "Social Media Dispatcher",
+        "OpenClaw Gateway",
+        "Copywriting AI",
+        "Outbound Bot"
+      ],
+      "focus_keywords": [
+        "OpenClaw WhatsApp API channel",
+        "Daily social media post generator WhatsApp",
+        "Automated social media copy kit dispatcher",
+        "Inbound locked WhatsApp bot"
+      ],
+      "url": "https://nevatal.id",
+      "github": "",
+      "tech_stack": [
+        "Node.js 26",
+        "OpenClaw Gateway API",
+        "WhatsApp Baileys Protocol",
+        "OpenRouter LLM",
+        "Bash / Cron"
+      ],
+      "archive_reference": "archive/WhatsApp_API_Channel_PRD.md",
+      "architecture_reference": "archive/WhatsApp_API_Channel_Architecture.md",
+      "key_features": [
+        "Strict inbound lockdown: incoming DMs and group chat automated replies are permanently disabled for privacy",
+        "Automated daily social post kit pushed to user's private WhatsApp every morning at 02:00 UTC",
+        "Multi-platform copy generation: formatted drafts for X/Twitter (<270 chars), Threads (<480 chars), Instagram captions with visual scene ideas, and Facebook Page",
+        "Tap-to-copy layout optimized for WhatsApp mobile messaging without broken markdown tables",
+        "Intelligent article and PRD matching ensuring accurate technical highlights"
+      ],
+      "use_cases": [
+        "Streamlining daily developer social media publishing with zero manual drafting friction",
+        "Private outbound notification dispatch with human-in-the-loop review"
+      ]
+    },
+    {
+      "id": "wordpress-automation",
+      "name": "WordPress Automation & Content Engine",
+      "container_names": [
+        "wordpress",
+        "db"
+      ],
+      "short_description": "Enterprise-grade content generation, dual-layer Yoast SEO indexing, and Proxmox VPS orchestration suite for WordPress.",
+      "category": "Content Management & Infrastructure",
+      "tags": [
+        "WordPress REST API",
+        "Yoast SEO Automation",
+        "SEO Content Engine",
+        "Proxmox Orchestration",
+        "WooCommerce Provisioning",
+        "OpenRouter"
+      ],
+      "focus_keywords": [
+        "WordPress automated SEO content engine",
+        "Yoast SEO REST API automatic resave",
+        "Automated technical article generator WordPress",
+        "WooCommerce Proxmox VPS orchestration"
+      ],
+      "url": "https://wordpress.nevatal.id",
+      "github": "",
+      "tech_stack": [
+        "Node.js 26",
+        "WordPress REST API",
+        "Yoast SEO REST MU-Plugin",
+        "PHP 8.2 CLI",
+        "Docker",
+        "OpenRouter LLM",
+        "WooCommerce API",
+        "Proxmox VE REST v2"
+      ],
+      "archive_reference": "archive/WordPress_Automation_PRD.md",
+      "architecture_reference": "archive/WordPress_Automation_Architecture.md",
+      "key_features": [
+        "Automated 1,200–1,800 word SEO article generation with dynamic angle rotation and PRD grounding",
+        "Dual-layer Yoast SEO resave engine guaranteeing 100% indexability, readability (90), and linkdex (68-78)",
+        "Cross-device Proxmox VE orchestration plugin (nevatal-cloud-manager) for WooCommerce automated VPS provisioning",
+        "Bidirectional internal backlink synchronization and automated reading time calculation",
+        "Scheduled cron auto-publishing pipelines and archive PRD auto-discovery"
+      ],
+      "use_cases": [
+        "Hands-free technical evangelism and high-ranking search engine optimization across portfolio projects",
+        "Automated cloud server provisioning and customer hosting management via WooCommerce"
+      ]
+    }
+  ]
+}
