@@ -7,6 +7,9 @@
     "productkit": "./cli/productkit.js"
   },
   "scripts": {
+    "campaign": "node cli/campaign.js",
+    "test": "node tests/runner.js",
+    "test:unit": "node tests/unit/index.js",
     "wp": "node scripts/wp-cli.js",
     "help": "node scripts/wp-cli.js help",
     "generate": "node scripts/generate-articles.js",
@@ -48,6 +51,7 @@
   "author": "thirza258",
   "license": "MIT",
   "dependencies": {
+    "pg": "^8.23.1",
     "playwright-core": "^1.40.0"
   }
 }

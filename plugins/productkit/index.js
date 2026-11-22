@@ -1,249 +1,242 @@
 import { defineToolPlugin } from "openclaw/plugin-sdk/tool-plugin";
 import { Type } from "typebox";
-import { spawn } from "child_process";
-import fs from "fs";
 import path from "path";
-import os from "os";
 import { fileURLToPath } from "url";
+import { createRequire } from "module";
 
-function resolveWordpressDir() {
-  const candidates = [
-    process.env.WORDPRESS_SKILL_DIR,
-    path.resolve(process.cwd(), "scripts"),
-    path.resolve(process.cwd()),
-    path.join(os.homedir(), ".openclaw/workspace/skills/wordpress"),
-    path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../scripts"),
-    path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../skills/wordpress")
-  ].filter(Boolean);
+const require = createRequire(import.meta.url);
+const { agents, models, db } = require("../../src");
+const { isSenderAuthorized } = require("../../src/utils/security");
+const config = require("../../src/config");
 
-  for (const c of candidates) {
-    if (fs.existsSync(path.join(c, "project_catalog.json")) || fs.existsSync(path.join(c, "scripts/project_catalog.json"))) {
-      return c;
-    }
-  }
-  return candidates[0] || process.cwd();
-}
-
-const AUTHORIZED_NUMBERS = (process.env.AUTHORIZED_NUMBERS || process.env.TARGET_PHONE_NUMBER || "")
-  .split(",")
-  .map(s => s.trim())
-  .filter(Boolean);
-
-function loadCatalog() {
-  try {
-    const dir = resolveWordpressDir();
-    const candidateFiles = [
-      path.join(dir, "project_catalog.json"),
-      path.join(dir, "scripts/project_catalog.json"),
-      path.join(dir, "project_catalog.example.json"),
-      path.join(dir, "scripts/project_catalog.example.json")
-    ];
-    for (const catPath of candidateFiles) {
-      if (fs.existsSync(catPath)) {
-        const parsed = JSON.parse(fs.readFileSync(catPath, "utf8"));
-        return Array.isArray(parsed) ? parsed : (parsed.projects || []);
-      }
-    }
-    console.error("[ProductKit] Catalog not found in candidates:", candidateFiles);
-  } catch (e) {
-    console.error("[ProductKit] Error loading catalog:", e);
-  }
-  return [];
-}
-
-function loadLaunchHistory() {
-  try {
-    const dir = resolveWordpressDir();
-    const histPath = path.join(dir, "launch_history.json");
-    if (fs.existsSync(histPath)) {
-      return JSON.parse(fs.readFileSync(histPath, "utf8"));
-    }
-  } catch (e) {
-    console.error("[ProductKit] Error loading launch history:", e);
-  }
-  return { launches: [] };
-}
-
-function formatProjectList() {
-  const projects = loadCatalog();
-  const history = loadLaunchHistory();
-
-  let msg = `🚀 *REGISTERED PROJECTS IN CATALOG (${projects.length})* 🚀\n`;
-  msg += `*(One-Time Platform Submissions)*\n\n`;
-
-  projects.forEach((p, idx) => {
-    const launched = (history.launches || []).find(l => l.project_id === p.id);
-    const status = launched ? `✅ [LAUNCHED on ${launched.date}]` : `⏳ [NOT YET LAUNCHED]`;
-    msg += `${(idx + 1).toString().padStart(2, "0")}. *${p.name}*\n   ID: \`${p.id}\` — ${status}\n`;
-  });
-
-  msg += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-  msg += `💡 *To generate & send Launch Kit to WhatsApp:*\n`;
-  msg += `Send: \`productkit.js <project_id>\`\n`;
-  msg += `Example: \`productkit.js rag-reader\` or \`productkit.js voltquest\``;
-
-  return msg;
-}
-
-function formatHelp() {
-  return `🚀 *Product Launch Kit Command Center*\n\n` +
-    `Commands sent from authorized numbers (configured via AUTHORIZED_NUMBERS or TARGET_PHONE_NUMBER) are automatically processed:\n\n` +
-    `• \`productkit.js list\`\n` +
-    `  Show all projects in catalog with their launch status.\n\n` +
-    `• \`productkit.js <project_id>\`\n` +
-    `  Generate complete Launch Kit (Product Hunt, AlternativeTo, BetaList, SaaSHub, TAAFT, Futurepedia, DevHunt, Peerlist) + 3 in-app screenshots (signed in when credentials exist) and deliver directly to this WhatsApp chat.\n` +
-    `  Example: \`productkit.js ragreader\` or \`productkit.js voltquest\`\n\n` +
-    `• \`productkit.js help\`\n` +
-    `  Display this command reference.`;
-}
-
-function normalizeProjectId(input, catalog) {
-  if (!input) return null;
-  const raw = input.trim().toLowerCase();
-
-  // 1. Exact ID match
-  let found = catalog.find(p => p.id.toLowerCase() === raw);
-  if (found) return found;
-
-  // 2. Normalized without dashes or spaces (e.g. "ragreader" -> "rag-reader")
-  const clean = raw.replace(/[-_\s]/g, "");
-  found = catalog.find(p => p.id.replace(/[-_\s]/g, "").toLowerCase() === clean);
-  if (found) return found;
-
-  // 3. Substring match on ID or name
-  found = catalog.find(p => p.id.toLowerCase().includes(raw) || p.name.toLowerCase().includes(raw));
-  return found || null;
-}
-
-function triggerLaunchKit(project) {
-  const dir = resolveWordpressDir();
-  const candidates = [
-    path.join(dir, "project-launch-kit.js"),
-    path.join(dir, "scripts/project-launch-kit.js"),
-    path.resolve(__dirname, "../../scripts/project-launch-kit.js")
-  ];
-  const scriptPath = candidates.find(c => fs.existsSync(c)) || candidates[0];
-  const logPath = path.join(dir, "launch-kit.log");
-  const nodeBinary = process.execPath;
-  let stdioConfig = "ignore";
-  try {
-    const outLog = fs.openSync(logPath, "a");
-    stdioConfig = ["ignore", outLog, outLog];
-  } catch (e) {
-    console.error("[ProductKit] Could not open log file, falling back to ignore:", e);
-  }
-  const child = spawn(nodeBinary, [scriptPath, "--project", project.id, "--send"], {
-    detached: true,
-    stdio: stdioConfig,
-    cwd: dir,
-    env: {
-      ...process.env
-    }
-  });
-  child.unref();
-}
-
-function handleCommand(rawArgs) {
-  const catalog = loadCatalog();
-  const sub = (rawArgs || "").trim();
-
-  if (!sub || sub.toLowerCase() === "list" || sub.toLowerCase() === "--list") {
-    return { text: formatProjectList() };
-  }
-
-  if (sub.toLowerCase() === "help" || sub.toLowerCase() === "--help" || sub.toLowerCase() === "-h") {
-    return { text: formatHelp() };
-  }
-
-  const project = normalizeProjectId(sub, catalog);
-  if (!project) {
+function handleCampaignCommand(rawArgs, senderId) {
+  const auth = isSenderAuthorized(senderId);
+  if (!auth.authorized) {
     return {
-      text: `❌ *Project not found:* \`${sub}\`\n\n` +
-        `Send \`productkit.js list\` to view available project IDs in the catalog.`
+      text: `⛔ *Access Denied:* ${auth.reason}`,
     };
   }
 
-  // Trigger one-time launch kit in background
-  triggerLaunchKit(project);
+  const parts = (rawArgs || "").trim().split(/\s+/);
+  const sub = parts[0] ? parts[0].toLowerCase() : "list";
+  const targetId = parts[1] || "";
+
+  if (sub === "list" || sub === "projects") {
+    return (async () => {
+      await db.initialize();
+      const projects = await models.Projects.getAll(true);
+      let msg = `🚀 *REGISTERED PROJECTS IN CATALOG (${projects.length})*\n\n`;
+      projects.forEach((p, idx) => {
+        msg += `${(idx + 1).toString().padStart(2, "0")}. *${p.name}*\n   ID: \`${p.id}\` | URL: ${p.url || 'None'}\n`;
+      });
+      msg += `\n━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+      msg += `💡 *To create or plan a campaign:*\n`;
+      msg += `• \`/campaign create <project_id>\`\n`;
+      msg += `• \`/campaign plan <project_id>\``;
+      return { text: msg };
+    })();
+  }
+
+  if (sub === "create") {
+    if (!targetId) return { text: "❌ Missing project ID. Usage: `/campaign create <project_id>`" };
+    return (async () => {
+      const res = await agents.campaign.createCampaign({ projectId: targetId, planMode: false });
+      return {
+        text: `🚀 *Campaign Created: ${res.campaignId}*\n\n` +
+          `Project: *${res.project}*\n` +
+          `Status: *${res.status}*\n\n` +
+          `Article generated (${res.article.wordCount} words).\n` +
+          `Quality Gate passed. SEO Score: ${res.qualityScores.seoScoreNumeric}/100.\n\n` +
+          `Reply with \`approve ${res.campaignId}\` to trigger multi-channel publication.`,
+      };
+    })();
+  }
+
+  if (sub === "plan") {
+    if (!targetId) return { text: "❌ Missing project ID. Usage: `/campaign plan <project_id>`" };
+    return (async () => {
+      const res = await agents.campaign.createCampaign({ projectId: targetId, planMode: true });
+      return {
+        text: `📋 *PLAN ONLY: ${res.project}*\n\n` +
+          `${res.plannedActions.join("\n")}\n\n` +
+          `Estimated AI usage: ~${res.estimatedTokens} tokens ($${res.estimatedCostUsd})\n\n` +
+          `_No external publication will occur._`,
+      };
+    })();
+  }
+
+  if (sub === "approve") {
+    if (!targetId) return { text: "❌ Missing campaign ID. Usage: `approve <campaign_id>`" };
+    return (async () => {
+      const res = await agents.campaign.approve(targetId, senderId || 'whatsapp');
+      return {
+        text: `✅ *Campaign ${targetId} Approved & Published!*\n\n` +
+          `Status: *${res.status}*\n` +
+          `Channels Published: ${(res.results || []).map(r => r.channel).join(', ')}`,
+      };
+    })();
+  }
+
+  if (sub === "reject") {
+    if (!targetId) return { text: "❌ Missing campaign ID. Usage: `reject <campaign_id>`" };
+    return (async () => {
+      const res = await agents.campaign.reject(targetId, senderId || 'whatsapp');
+      return {
+        text: `❌ *Campaign ${targetId} Rejected.*`,
+      };
+    })();
+  }
+
+  if (sub === "status") {
+    if (!targetId) return { text: "❌ Missing campaign ID. Usage: `status <campaign_id>`" };
+    return (async () => {
+      const res = await agents.campaign.getStatus(targetId);
+      return {
+        text: `📊 *Campaign Status: ${res.campaignId}*\n\n` +
+          `Project: *${res.projectName}*\n` +
+          `Status: *${res.status}*\n` +
+          `Step: ${res.currentStep}\n` +
+          `AI Cost: $${res.aiUsage.totalCostUsd} (${res.aiUsage.totalTokens} tokens)\n` +
+          `Publications: ${res.publications.length > 0 ? res.publications.map(p => `${p.channel}: ${p.status}`).join(', ') : 'None yet'}`,
+      };
+    })();
+  }
 
   return {
-    text: `🚀 *One-Time Launch Kit initiated for: ${project.name}!*\n\n` +
-      `📸 *Capturing 3 In-App Screenshots:*\n` +
-      `1️⃣ Desktop App Workspace (1280x800)\n` +
-      `2️⃣ Feature / Deep Workspace View (1440x900)\n` +
-      `3️⃣ Mobile In-App View (390x844)\n` +
-      `🔐 Signs in with the project's account when credentials exist.\n\n` +
-      `📝 *Drafting Directory Submissions:*\n` +
-      `Product Hunt, AlternativeTo, BetaList, SaaSHub, TAAFT, Futurepedia, DevHunt, and Peerlist.\n\n` +
-      `⏳ Generating assets now. The 3 gallery screenshots and full submission kit will arrive in this chat in ~30 seconds!`
+    text: `🚀 *Marketing Campaign Commands*\n\n` +
+      `• \`campaign list\` - Show registered projects\n` +
+      `• \`campaign create <project_id>\` - Generate full campaign and pause for approval\n` +
+      `• \`campaign plan <project_id>\` - Plan actions only without side effects\n` +
+      `• \`approve <campaign_id>\` - Authorize publication\n` +
+      `• \`reject <campaign_id>\` - Reject campaign\n` +
+      `• \`status <campaign_id>\` - View current progress\n` +
+      `• \`rollback <campaign_id>\` - Unpublish/withdraw posts`,
   };
-}
-
-function isAuthorized(senderId) {
-  if (!senderId) return true; // Local session or CLI
-  if (AUTHORIZED_NUMBERS.length === 0) return true; // Default allow if unconfigured
-  return AUTHORIZED_NUMBERS.some(num => senderId.includes(num));
 }
 
 const plugin = defineToolPlugin({
   id: "productkit",
   name: "ProductKit",
-  description: "Product launch kit command handler for WhatsApp and CLI.",
+  description: "Autonomous Marketing Operations Platform for OpenClaw.",
   tools: (tool) => [
     tool({
-      name: "productkit_command",
-      description: "Execute a productkit command (list, launch kit generation, or help).",
+      name: "campaign_create",
+      description: "Create an autonomous marketing campaign for a registered project.",
       parameters: Type.Object({
-        command: Type.String({ description: "Command to execute: 'list', 'help', or project ID like 'ragreader'." })
+        projectId: Type.String({ description: "Target project ID (e.g. 'rag-reader', 'english-practice')" }),
+        planMode: Type.Optional(Type.Boolean({ description: "Run in plan-only mode without executing" })),
+      }),
+      execute: async ({ projectId, planMode }) => {
+        return agents.campaign.createCampaign({ projectId, planMode: Boolean(planMode) });
+      },
+    }),
+    tool({
+      name: "campaign_plan",
+      description: "Generate a marketing execution plan for a project without performing external actions.",
+      parameters: Type.Object({
+        projectId: Type.String({ description: "Target project ID" }),
+      }),
+      execute: async ({ projectId }) => {
+        return agents.campaign.createCampaign({ projectId, planMode: true });
+      },
+    }),
+    tool({
+      name: "campaign_approve",
+      description: "Approve a campaign that is waiting in READY_FOR_APPROVAL status.",
+      parameters: Type.Object({
+        campaignId: Type.String({ description: "The campaign ID to approve" }),
+      }),
+      execute: async ({ campaignId }) => {
+        return agents.campaign.approve(campaignId, 'agent');
+      },
+    }),
+    tool({
+      name: "campaign_status",
+      description: "Check the status and publication details of a campaign.",
+      parameters: Type.Object({
+        campaignId: Type.String({ description: "The campaign ID" }),
+      }),
+      execute: async ({ campaignId }) => {
+        return agents.campaign.getStatus(campaignId);
+      },
+    }),
+    tool({
+      name: "campaign_rollback",
+      description: "Rollback and unpublish external posts for a campaign.",
+      parameters: Type.Object({
+        campaignId: Type.String({ description: "The campaign ID to rollback" }),
+      }),
+      execute: async ({ campaignId }) => {
+        return agents.campaign.rollback(campaignId);
+      },
+    }),
+    tool({
+      name: "campaign_list",
+      description: "List all projects registered in the marketing platform.",
+      parameters: Type.Object({}),
+      execute: async () => {
+        await db.initialize();
+        return models.Projects.getAll(true);
+      },
+    }),
+    tool({
+      name: "productkit_command",
+      description: "Execute campaign or legacy productkit command.",
+      parameters: Type.Object({
+        command: Type.String({ description: "Command text" }),
       }),
       execute: async ({ command }) => {
-        return handleCommand(command);
-      }
-    })
-  ]
+        return handleCampaignCommand(command, config.whatsapp.authorizedNumbers[0]);
+      },
+    }),
+  ],
 });
 
 const originalRegister = plugin.register;
-plugin.register = function(api) {
+plugin.register = function (api) {
   if (originalRegister) {
     originalRegister(api);
   }
 
-  // 1. Register official slash command /productkit
+  // Register slash command /campaign
   api.registerCommand({
-    name: "productkit",
-    description: "Generate and send product launch kit or list catalog projects",
+    name: "campaign",
+    description: "Create, plan, approve, or manage marketing campaigns",
     acceptsArgs: true,
     requireAuth: true,
     handler: async (ctx) => {
-      if (!isAuthorized(ctx.senderId)) {
-        return { text: "⛔ Unauthorized sender." };
-      }
-      return handleCommand(ctx.args || ctx.rest || "");
-    }
+      const senderId = ctx.senderId || "";
+      return handleCampaignCommand(ctx.args || ctx.rest || "", senderId);
+    },
   });
 
-  // 2. Chat hook matching 'productkit.js ...' or 'productkit ...' without requiring slash
+  // Natural text listener: "campaign create ...", "approve cmp_...", etc.
   api.on(
     "before_agent_reply",
     async (event, ctx) => {
       const body = (event.cleanedBody || "").trim();
-      const match = body.match(/^\/?productkit(?:\.js)?(?:\s+(.*))?$/i);
-      if (match) {
+      const campaignMatch = body.match(/^\/?campaign(?:\.js)?(?:\s+(.*))?$/i);
+      const approveMatch = body.match(/^(?:approve|reject|preview|status|rollback)\s+(cmp_[a-zA-Z0-9_]+)/i);
+
+      if (campaignMatch) {
         const senderId = ctx?.senderId || "";
-        if (senderId && !isAuthorized(senderId)) {
-          return {
-            handled: true,
-            reply: { text: "⛔ Unauthorized. Commands can only be sent from the authorized owner number." }
-          };
-        }
-        const rawArgs = match[1] || "";
-        const result = handleCommand(rawArgs);
+        const rawArgs = campaignMatch[1] || "";
+        const result = await handleCampaignCommand(rawArgs, senderId);
         return {
           handled: true,
-          reply: result
+          reply: result,
         };
       }
+
+      if (approveMatch) {
+        const senderId = ctx?.senderId || "";
+        const result = await handleCampaignCommand(body, senderId);
+        return {
+          handled: true,
+          reply: result,
+        };
+      }
+
       return undefined;
     },
     { eligibleTriggers: ["user"] }

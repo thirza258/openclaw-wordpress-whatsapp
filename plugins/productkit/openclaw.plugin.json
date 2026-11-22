@@ -1,18 +1,33 @@
 {
   "id": "productkit",
-  "name": "ProductKit",
-  "description": "Product launch kit command handler for WhatsApp and CLI.",
-  "version": "1.0.0",
+  "name": "ProductKit Marketing Operations",
+  "description": "Agentic Marketing Operations Platform: campaign lifecycle, approval gates, SEO content generation, WordPress publishing, and social syndication.",
+  "version": "2.0.0",
   "activation": {
     "onStartup": true
   },
   "configSchema": {
     "type": "object",
-    "properties": {},
+    "properties": {
+      "targetPhoneNumber": {
+        "type": "string"
+      },
+      "authorizedNumbers": {
+        "type": "string"
+      }
+    },
     "additionalProperties": false
   },
   "contracts": {
     "tools": [
+      "campaign_create",
+      "campaign_plan",
+      "campaign_status",
+      "campaign_approve",
+      "campaign_reject",
+      "campaign_preview",
+      "campaign_rollback",
+      "campaign_list",
       "productkit_command"
     ]
   }
