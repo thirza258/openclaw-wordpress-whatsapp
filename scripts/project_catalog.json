@@ -1290,6 +1290,71 @@
         "Hands-free technical evangelism and high-ranking search engine optimization across portfolio projects",
         "Automated cloud server provisioning and customer hosting management via WooCommerce"
       ]
+    },
+    {
+      "id": "noelle",
+      "name": "Noelle — Local AI Model Lab & OpenAI-Compatible Gateway",
+      "container_names": [
+        "noelle-landing"
+      ],
+      "short_description": "On-device desktop AI model lab and local OpenAI/MCP gateway for macOS, Windows, and Linux that runs, quantizes, evaluates, and serves open LLMs locally with zero telemetry and 100% data sovereignty.",
+      "category": "Artificial Intelligence & Developer Tools",
+      "tags": [
+        "Local LLM",
+        "AI Model Lab",
+        "llama.cpp",
+        "GGUF Quantization",
+        "Model Evaluation Lab",
+        "OpenAI-Compatible API",
+        "Model Context Protocol",
+        "MCP Server",
+        "Local RAG",
+        "Privacy-First AI",
+        "Offline AI",
+        "PySide6",
+        "Nginx Alpine"
+      ],
+      "focus_keywords": [
+        "Local AI model lab",
+        "Run open source LLMs locally",
+        "On device LLM evaluation lab",
+        "Private OpenAI compatible local API gateway",
+        "llama.cpp GGUF local model runner",
+        "Model Context Protocol local AI server"
+      ],
+      "port": 10095,
+      "url": "https://noelle.nevatal.id",
+      "github": "https://github.com/thirza258/NoelleApp",
+      "tech_stack": [
+        "Python 3.10+",
+        "PySide6 (Qt 6)",
+        "llama.cpp / llama-cpp-python",
+        "GGUF / Hugging Face Hub API",
+        "FastAPI / Uvicorn (OpenAI REST Gateway)",
+        "Model Context Protocol (MCP) Server",
+        "SQLite / Local Vector Indexes",
+        "Docker Compose / Nginx Alpine"
+      ],
+      "archive_reference": "archive/Noelle_PRD.md",
+      "architecture_reference": "archive/Noelle_Architecture.md",
+      "key_features": [
+        "100% on-device AI inference with zero telemetry, no accounts, and complete offline capability",
+        "Hardware Advisor: auto-detects RAM, VRAM, and GPU (Metal/CUDA/Vulkan) to calculate memory headroom and prevent OOM crashes",
+        "Integrated Model Quantization Engine for GGUF, AWQ, and Apple MLX with single-click conversion",
+        "Evaluation Lab: automated quantitative testing suite benchmarking accuracy, token throughput (tok/s), latency, and hallucination on custom datasets",
+        "Local OpenAI-Compatible REST Gateway (port 8765) with DNS rebinding defenses and loopback-only binding",
+        "Model Context Protocol (MCP) server integration allowing IDE coding agents (Cursor, Claude Desktop, Antigravity) to query local models",
+        "Isolated Subprocess Worker running in HF_HUB_OFFLINE=1 with random per-session loopback auth tokens",
+        "On-device Knowledge Base & RAG engine with semantic chunking and private vector search",
+        "Enterprise-grade Credential Security storing Hugging Face tokens exclusively in OS Keychain, Credential Manager, or Secret Service",
+        "Lightweight self-hosted landing page and documentation site in Nginx Alpine (port 10095) styled in Nevatal signature golden yellow (#FFC700)"
+      ],
+      "use_cases": [
+        "Developers needing a drop-in local OpenAI replacement for development and CI testing without API costs",
+        "Privacy-sensitive organizations handling confidential legal, healthcare, or financial documents in fully air-gapped environments",
+        "AI researchers and engineers running comparative benchmarks across model architectures and quantization levels",
+        "Software engineers using IDE coding agents connected to free local models via Model Context Protocol (MCP)"
+      ]
     }
   ]
 }
