@@ -66,7 +66,7 @@ const config = {
   // WordPress REST API
   wordpress: {
     baseUrl: (process.env.WP_BASE_URL || 'http://localhost:8085').replace(/\/$/, ''),
-    user: process.env.WP_USER || 'admin',
+    user: process.env.WP_USER || 'play258',
     appPassword: process.env.WP_APP_PASSWORD || '',
     basicToken: process.env.WP_BASIC_TOKEN || '',
     jwtToken: process.env.WP_JWT_TOKEN || '',
@@ -77,20 +77,22 @@ const config = {
   llm: {
     openrouterApiKey: process.env.OPENROUTER_API_KEY || '',
     defaultProvider: process.env.LLM_PROVIDER || 'openrouter',
-    primaryModel: process.env.OPENROUTER_MODEL || 'google/gemma-4-26b-a4b-it',
+    primaryModel: process.env.OPENROUTER_MODEL || 'openrouter/free',
     models: {
-      research: process.env.MODEL_RESEARCH || 'google/gemma-4-26b-a4b-it',
-      article: process.env.MODEL_ARTICLE || 'google/gemma-4-26b-a4b-it',
-      social: process.env.MODEL_SOCIAL || 'google/gemma-4-26b-a4b-it',
-      scoring: process.env.MODEL_SCORING || 'cohere/north-mini-code:free',
-      review: process.env.MODEL_REVIEW || 'google/gemma-4-26b-a4b-it',
+      research: process.env.MODEL_RESEARCH || 'openrouter/free',
+      article: process.env.MODEL_ARTICLE || 'openrouter/free',
+      social: process.env.MODEL_SOCIAL || 'openrouter/free',
+      scoring: process.env.MODEL_SCORING || 'particle-ai/particle-1:free',
+      review: process.env.MODEL_REVIEW || 'openrouter/free',
     },
     freeModelsPool: [
       'openrouter/free',
+      'particle-ai/particle-1:free',
+      'baidu/ernie-5.5-flash-preview:free',
+      'recursive/flint-v1.0:free',
       'google/gemma-4-26b-a4b-it:free',
       'google/gemma-4-31b-it:free',
       'nvidia/nemotron-3-ultra-550b-a55b:free',
-      'nvidia/nemotron-3.5-lightning:free',
     ],
     maxTokens: parseInt(process.env.MAX_AI_TOKENS_PER_CAMPAIGN || '150000', 10),
     maxCostUsd: parseFloat(process.env.MAX_AI_COST_PER_CAMPAIGN || '2.00'),

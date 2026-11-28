@@ -37,13 +37,13 @@ const PRIMARY_MODEL = process.env.OPENROUTER_MODEL || 'google/gemma-4-26b-a4b-it
 
 // Verified active free models on OpenRouter (ordered by verified reliability & speed)
 const FREE_MODELS_POOL = [
-  'cohere/north-mini-code:free',
-  'nvidia/nemotron-3-ultra-550b-a55b:free',
-  'xingchen-agi/xing4.0-29b-a4b:free',
-  'dots-studio/dots-3-note-preview:free',
+  'openrouter/free',
+  'particle-ai/particle-1:free',
+  'baidu/ernie-5.5-flash-preview:free',
+  'recursive/flint-v1.0:free',
   'google/gemma-4-26b-a4b-it:free',
   'google/gemma-4-31b-it:free',
-  'openrouter/free'
+  'nvidia/nemotron-3-ultra-550b-a55b:free'
 ];
 
 let globalCreditsDepleted = false;
@@ -880,7 +880,6 @@ Return ONLY valid JSON matching this schema:
           ],
           max_tokens: 2500,
           temperature: 0.7,
-          reasoning: { effort: 'none' },
         }),
         signal: AbortSignal.timeout(60000),
       });

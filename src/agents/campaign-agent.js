@@ -154,9 +154,14 @@ class CampaignAgent {
       throw new Error(`Campaign [${campaignId}] is in status ${campaign.status}, cannot approve.`);
     }
 
+    // Atomic conditional status transition to prevent race conditions on concurrent approvals
+    const transition = await Campaigns.transitionStatus(campaignId, 'READY_FOR_APPROVAL', 'APPROVED', 'SCHEDULED_FOR_PUBLISHING');
+    if (transition.changes === 0) {
+      throw new Error(`Campaign [${campaignId}] is no longer in READY_FOR_APPROVAL status (cannot approve).`);
+    }
+
     logger.info(`Approving campaign ${campaignId} by ${responderId}...`);
     await Approvals.respond({ campaignId, status: 'approved', responderId });
-    await Campaigns.updateStatus(campaignId, 'APPROVED', 'SCHEDULED_FOR_PUBLISHING');
 
     // Execute publication workflow immediately
     return this.executePublishing(campaignId);
@@ -168,9 +173,18 @@ class CampaignAgent {
   async reject(campaignId, responderId = 'human', reason = '') {
     const campaign = await Campaigns.getById(campaignId);
     if (!campaign) throw new Error(`Campaign [${campaignId}] not found`);
+    if (campaign.status !== 'READY_FOR_APPROVAL') {
+      throw new Error(`Campaign [${campaignId}] is in status ${campaign.status}, cannot reject.`);
+    }
+
+    // Atomic conditional status transition to prevent concurrent approval/rejection race
+    const transition = await Campaigns.transitionStatus(campaignId, 'READY_FOR_APPROVAL', 'FAILED', `REJECTED_BY_HUMAN: ${reason}`);
+    if (transition.changes === 0) {
+      throw new Error(`Campaign [${campaignId}] is no longer in READY_FOR_APPROVAL status (cannot reject).`);
+    }
+
     logger.info(`Rejecting campaign ${campaignId} by ${responderId}...`);
     await Approvals.respond({ campaignId, status: 'rejected', responderId, notes: reason });
-    await Campaigns.updateStatus(campaignId, 'FAILED', `REJECTED_BY_HUMAN: ${reason}`);
     return { campaignId, status: 'REJECTED', reason };
   }
 
@@ -180,6 +194,9 @@ class CampaignAgent {
   async cancel(campaignId) {
     const campaign = await Campaigns.getById(campaignId);
     if (!campaign) throw new Error(`Campaign [${campaignId}] not found`);
+    if (['PUBLISHED', 'PUBLISHING', 'CANCELLED'].includes(campaign.status)) {
+      throw new Error(`Campaign [${campaignId}] is in status ${campaign.status}, cannot cancel directly. Use rollback to withdraw published posts.`);
+    }
     logger.info(`Cancelling campaign ${campaignId}...`);
     await Campaigns.updateStatus(campaignId, 'CANCELLED', 'USER_CANCELLED');
     return { campaignId, status: 'CANCELLED' };
@@ -297,23 +314,29 @@ class CampaignAgent {
           logger.error(`Social publish failed for ${channel}: ${socErr.message}`);
           publicationResults.push({ channel, status: 'failed', error: socErr.message });
         }
+      } else {
+        logger.error(`No content variant found for requested channel: ${channel}`);
+        publicationResults.push({ channel, status: 'failed', error: `Missing content variant for channel: ${channel}` });
       }
     }
 
-    await Campaigns.updateStatus(campaignId, 'PUBLISHED', 'ALL_CHANNELS_PROCESSED');
-
     const publishedChannels = publicationResults.filter((p) => p.status === 'published').map((p) => p.channel);
+    const allFailed = publicationResults.length > 0 && publicationResults.every((p) => p.status === 'failed');
+    const finalStatus = allFailed ? 'FAILED' : 'PUBLISHED';
+
+    await Campaigns.updateStatus(campaignId, finalStatus, allFailed ? 'ALL_CHANNELS_FAILED' : 'ALL_CHANNELS_PROCESSED');
+
     await whatsAppTools.sendStatusUpdate({
       campaignId,
       projectName: project.name,
-      status: 'PUBLISHED',
-      currentStep: 'COMPLETED',
+      status: finalStatus,
+      currentStep: allFailed ? 'FAILED' : 'COMPLETED',
       channelsPublished: publishedChannels,
     });
 
     return {
       campaignId,
-      status: 'PUBLISHED',
+      status: finalStatus,
       results: publicationResults,
     };
   }

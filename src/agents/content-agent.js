@@ -280,16 +280,46 @@ OUTPUT FORMAT: Return ONLY valid JSON:
     }
 
     const savedVariants = [];
-    for (const [channel, text] of Object.entries(variants)) {
-      if (text && typeof text === 'string') {
+    for (const [channel, rawVal] of Object.entries(variants)) {
+      if (!rawVal) continue;
+      let textContent = '';
+      if (typeof rawVal === 'string') {
+        textContent = rawVal.trim();
+      } else if (Array.isArray(rawVal)) {
+        textContent = rawVal.map((item, idx) => (typeof item === 'object' ? JSON.stringify(item) : `Scene ${idx + 1}: ${item}`)).join('\n');
+      } else if (typeof rawVal === 'object') {
+        textContent = JSON.stringify(rawVal, null, 2);
+      } else {
+        textContent = String(rawVal).trim();
+      }
+      if (textContent) {
+        // Enforce channel character limits defensively
+        if (channel === 'bluesky' && textContent.length > 300) {
+          if (textContent.includes(liveUrl)) {
+            const maxPrefix = Math.max(20, 295 - liveUrl.length);
+            const prefix = textContent.split(liveUrl)[0].trim().slice(0, maxPrefix);
+            textContent = `${prefix}… ${liveUrl}`;
+          } else {
+            textContent = textContent.slice(0, 297) + '…';
+          }
+        } else if (channel === 'x' && textContent.length > 280) {
+          if (textContent.includes(liveUrl)) {
+            const maxPrefix = Math.max(20, 275 - liveUrl.length);
+            const prefix = textContent.split(liveUrl)[0].trim().slice(0, maxPrefix);
+            textContent = `${prefix}… ${liveUrl}`;
+          } else {
+            textContent = textContent.slice(0, 277) + '…';
+          }
+        }
+
         const variantId = await Content.addVariant({
           campaignId,
           contentId,
           channel,
           variantType: channel === 'tiktok' ? 'storyboard' : 'post',
-          textContent: text.trim(),
+          textContent,
         });
-        savedVariants.push({ id: variantId, channel, text: text.trim() });
+        savedVariants.push({ id: variantId, channel, text: textContent });
       }
     }
 

@@ -53,15 +53,13 @@ const PRIMARY_MODEL = process.env.OPENROUTER_MODEL || 'google/gemma-4-26b-a4b-it
 
 // Verified active free models on OpenRouter
 const FREE_MODELS_POOL = [
-  'cohere/north-mini-code:free',
-  'nvidia/nemotron-3.5-lightning:free',
-  'dots-studio/dots-3-note-preview:free',
-  'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free',
-  'nvidia/nemotron-3-ultra-550b-a55b:free',
-  'xingchen-agi/xing4.0-29b-a4b:free',
+  'openrouter/free',
+  'particle-ai/particle-1:free',
+  'baidu/ernie-5.5-flash-preview:free',
+  'recursive/flint-v1.0:free',
   'google/gemma-4-26b-a4b-it:free',
   'google/gemma-4-31b-it:free',
-  'openrouter/free'
+  'nvidia/nemotron-3-ultra-550b-a55b:free'
 ];
 
 function isCreditOr402Error(status, errText) {
@@ -821,8 +819,7 @@ async function callOpenRouterJson(prompt, { maxTokens = 2400, temperature = 0.8,
             { role: 'user', content: prompt }
           ],
           temperature,
-          max_tokens: maxTokens,
-          reasoning: { effort: 'none' }
+          max_tokens: maxTokens
         }),
         signal: controller.signal
       });
@@ -848,7 +845,7 @@ async function callOpenRouterJson(prompt, { maxTokens = 2400, temperature = 0.8,
         throw new Error(`OpenRouter Provider Error (${json.error.code || 'unknown'}): ${errMsg}`);
       }
 
-      const rawContent = json.choices?.[0]?.message?.content?.trim();
+      const rawContent = (json.choices?.[0]?.message?.content || json.choices?.[0]?.message?.reasoning || '').trim();
       if (!rawContent) throw new Error('Empty response from model');
 
       const jsonMatch = rawContent.match(/\{[\s\S]*\}/);
@@ -1070,8 +1067,7 @@ CRITICAL JSON FORMATTING:
             }
           ],
           temperature: 0.7,
-          max_tokens: 5000,
-          reasoning: { effort: 'none' }
+          max_tokens: 5000
         }),
         signal: controller.signal
       });
@@ -1097,7 +1093,7 @@ CRITICAL JSON FORMATTING:
         throw new Error(`OpenRouter Provider Error (${json.error.code || 'unknown'}): ${errMsg}`);
       }
 
-      const rawContent = json.choices?.[0]?.message?.content?.trim();
+      const rawContent = (json.choices?.[0]?.message?.content || json.choices?.[0]?.message?.reasoning || '').trim();
       if (!rawContent) {
         throw new Error('Empty response from model');
       }

@@ -74,7 +74,16 @@ class BlueskyProvider extends BaseSocialProvider {
 
   async delete(id) {
     logger.info(`Bluesky delete requested for: ${id}`);
-    // If CLI supports delete, invoke it here
+    if (!fs.existsSync(this.botCli) || !id) return;
+    try {
+      spawnSync(process.execPath, [this.botCli, 'delete', id], {
+        encoding: 'utf8',
+        env: process.env,
+        timeout: 15000,
+      });
+    } catch (e) {
+      logger.warn(`Could not delete remote Bluesky post #${id}: ${e.message}`);
+    }
   }
 
   async metrics(id) {

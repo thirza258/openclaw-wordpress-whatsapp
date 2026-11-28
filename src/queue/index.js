@@ -79,6 +79,10 @@ class JobQueue {
       const handler = this.handlers.get(job.job_type);
       if (!handler) {
         logger.warn(`No handler registered for job type: ${job.job_type}`);
+        await db.run("UPDATE jobs SET status = 'failed', error = ? WHERE id = ?", [
+          `No handler registered for job type: ${job.job_type}`,
+          job.id,
+        ]);
         return;
       }
 
@@ -86,10 +90,18 @@ class JobQueue {
       const startedAt = new Date().toISOString();
       const startTime = Date.now();
 
-      await db.run('UPDATE jobs SET status = "running", attempts = attempts + 1, started_at = ? WHERE id = ?', [
-        startedAt,
-        job.id,
-      ]);
+      const claimResult = await db.run(
+        "UPDATE jobs SET status = 'running', attempts = attempts + 1, started_at = ? WHERE id = ? AND status = 'queued'",
+        [startedAt, job.id]
+      );
+      if (claimResult.changes === 0) {
+        // Job was claimed concurrently by another worker
+        this.activeJobsCount--;
+        if (this.running) {
+          setImmediate(() => this.processNext());
+        }
+        return;
+      }
 
       const payload = job.payload ? JSON.parse(job.payload) : {};
       logger.info(`Processing job ${job.id} [${job.job_type}] (Attempt ${job.attempts + 1}/${job.max_attempts})...`);
@@ -99,7 +111,7 @@ class JobQueue {
         const finishedAt = new Date().toISOString();
         const durationMs = Date.now() - startTime;
 
-        await db.run('UPDATE jobs SET status = "completed", result = ?, completed_at = ? WHERE id = ?', [
+        await db.run("UPDATE jobs SET status = 'completed', result = ?, completed_at = ? WHERE id = ?", [
           JSON.stringify(result || {}),
           finishedAt,
           job.id,

@@ -143,6 +143,15 @@ const Campaigns = {
     return this.getById(id);
   },
 
+  async transitionStatus(id, fromStatus, toStatus, step = null) {
+    const now = new Date().toISOString();
+    const res = await db.run(
+      `UPDATE campaigns SET status = ?, current_step = COALESCE(?, current_step), updated_at = ? WHERE id = ? AND status = ?`,
+      [toStatus, step, now, id, fromStatus]
+    );
+    return res;
+  },
+
   async recordCost(id, costUsd, tokens) {
     const now = new Date().toISOString();
     await db.run(

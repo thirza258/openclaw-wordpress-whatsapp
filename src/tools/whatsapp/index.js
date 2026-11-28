@@ -3,7 +3,7 @@
 const config = require('../../config');
 const { isSenderAuthorized } = require('../../utils/security');
 const logger = require('../../utils/logger').child('WhatsAppTools');
-const { spawn } = require('child_process');
+const child_process = require('child_process');
 
 /**
  * WhatsApp Control Plane Tools (PRD Section 18, 19, 40)
@@ -30,12 +30,12 @@ const WhatsAppTools = {
     logger.info(`Sending WhatsApp message to ${destination}...`);
     try {
       const openclawBin = config.whatsapp.openclawBin;
-      const args = ['message', 'send', '--to', destination, '--text', text];
+      const args = ['message', 'send', '--channel', 'whatsapp', '--target', destination, '--message', text];
       for (const m of mediaFiles) {
         args.push('--media', m);
       }
 
-      const child = spawn(openclawBin, args, {
+      const child = child_process.spawn(openclawBin, args, {
         stdio: 'ignore',
         detached: true,
       });
